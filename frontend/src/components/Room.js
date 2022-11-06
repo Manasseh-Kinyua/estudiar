@@ -3,11 +3,9 @@ import { Card } from 'react-bootstrap'
 
 function Room() {
   return (
-    <div>
       <Card>
         room card
       </Card>
-    </div>
   )
 }
 
