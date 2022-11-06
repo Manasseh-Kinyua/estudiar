@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar, Nav, Container, Row, Image, NavDropdown, Badge } from 'react-bootstrap';
-// import { LinkContainer } from 'react-router-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
 function Header() {
   return (
@@ -8,9 +8,9 @@ function Header() {
       <header className='fixed-nav'>
       <Navbar style={{minHeight: '10vh'}}  expand="lg" className='bg' collapseOnSelect>
             <Container>
-                {/* <LinkContainer to='/'> */}
+                <LinkContainer to='/'>
                 <Navbar.Brand><Image style={{width: '2rem'}} src='https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/50/48/e6/5048e628-43ca-3e5e-0f3b-c2aa4012de6f/source/512x512bb.jpg' alt='logo' /><strong>Estudiar</strong></Navbar.Brand>
-                {/* </LinkContainer> */}
+                </LinkContainer>
 
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
