@@ -2,6 +2,8 @@ import React from 'react'
 import { Card, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
+import Chip from '@mui/material/Chip';
+import Rating from './Rating';
 
 function Room({room}) {
   return (
@@ -24,8 +26,14 @@ function Room({room}) {
             </Card.Title>
           </Link>
           <Card.Text>
-              {room.topic.name}
+            <Chip label={room.topic.name} variant="outlined" color="primary" />
           </Card.Text>
+          <Card.Text as='div'>
+            <div className='my-3'>
+                <Rating value={room.rating} text={`${room.numReviews} reviews`} color={'#f8e825'}/>
+            </div>
+        </Card.Text>
+        <hr style={{height: '1px', backgroundColor: 'white', color: 'white'}} />
         </Card.Body>
       </Card>
   )
