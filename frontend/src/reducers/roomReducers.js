@@ -8,7 +8,8 @@ export const roomListReducer = (state = {rooms:[]}, action) => {
     switch(action.type) {
         case ROOMS_LIST_REQUEST:
             return{
-                loading: true
+                rooms: [],
+                loading: true,
             }
 
         case ROOMS_LIST_SUCCESS:

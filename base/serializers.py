@@ -1,5 +1,11 @@
 from rest_framework import serializers
 from .models import Topic, Room, Message, Review
+from django.contrib.auth.models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
 
 class TopicSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,6 +25,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 class RoomSerializer(serializers.ModelSerializer):
     messages = serializers.SerializerMethodField(read_only=True)
     reviews = serializers.SerializerMethodField(read_only=True)
+    host = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Room
@@ -32,4 +39,9 @@ class RoomSerializer(serializers.ModelSerializer):
     def get_reviews(self, obj):
         reviews = obj.review_set.all()
         serializer = ReviewSerializer(reviews, many=True)
+        return serializer.data
+
+    def get_host(self, obj):
+        host = obj.host
+        serializer = UserSerializer(host, many=False)
         return serializer.data

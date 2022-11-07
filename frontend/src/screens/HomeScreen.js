@@ -34,9 +34,9 @@ function HomeScreen() {
             </Col>
           </Row>
           <Row className='py-4'>
-            {rooms && rooms.map(room => (
-              <Col key={room.id}>
-                <Room />
+            {rooms.map(room => (
+              <Col sm={6} key={room.id}>
+                <Room room={room} />
               </Col>
             ))}
           </Row>
