@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Button } from 'react-bootstrap'
 import { listRooms } from '../actions/roomActions'
 import Room from '../components/Room'
+import Loader from '../components/Loader'
 
 function HomeScreen() {
 
@@ -19,8 +20,6 @@ function HomeScreen() {
   return (
     <div>
       <Row>
-        {loading ? <p>Loading....</p> :
-          error ? <p>Error...</p> : (
             <Col md={8}>
             <Row>
               <Col>
@@ -36,6 +35,8 @@ function HomeScreen() {
               </Col>
             </Row>
             <Row className='py-4'>
+              {loading && <Loader />}
+              {error && <h3>error</h3>}
               {rooms.map(room => (
                 <Col className='my-2' sm={6} key={room.id}>
                   <Room room={room} />
@@ -43,7 +44,6 @@ function HomeScreen() {
               ))}
             </Row>
           </Col>
-          )}
         <Col md={4}>
           <h6>RECENT ACTIVITY</h6>
         </Col>
