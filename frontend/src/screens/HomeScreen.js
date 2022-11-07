@@ -12,7 +12,6 @@ function HomeScreen() {
 
     const roomList = useSelector(state => state.roomList)
     const {loading, error, rooms} = roomList
-    console.log(rooms)
 
     useEffect(() => {
         dispatch(listRooms())

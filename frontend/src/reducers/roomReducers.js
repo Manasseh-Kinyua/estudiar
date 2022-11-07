@@ -38,6 +38,7 @@ export const roomDetailsReducer = (state = {room:{}}, action) => {
         case ROOMS_DETAILS_REQUEST:
             return{
                 loading: true,
+                ...state
             }
 
         case ROOMS_DETAILS_SUCCESS:
