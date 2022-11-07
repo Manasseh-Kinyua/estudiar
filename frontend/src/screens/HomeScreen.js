@@ -25,7 +25,7 @@ function HomeScreen() {
               <h6>STUDY ROOMS</h6>
               <small>All the Rooms</small>
             </Col>
-            <Col className='text-right'>
+            <Col style={{textAlign: 'right'}}>
               <Button
                 style={{backgroundColor: '#46B5D1', color: 'black'}}
                 className='btn-md'>
@@ -35,7 +35,7 @@ function HomeScreen() {
           </Row>
           <Row className='py-4'>
             {rooms.map(room => (
-              <Col sm={6} key={room.id}>
+              <Col className='my-2' sm={6} key={room.id}>
                 <Room room={room} />
               </Col>
             ))}

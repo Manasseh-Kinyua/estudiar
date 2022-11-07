@@ -26,7 +26,7 @@ function Room({room}) {
             </Card.Title>
           </Link>
           <Card.Text>
-            <Chip label={room.topic.name} variant="outlined" color="primary" />
+            <Chip label={room.topic.name} variant="outlined" color="info" />
           </Card.Text>
           <Card.Text as='div'>
             <div className='my-3'>
