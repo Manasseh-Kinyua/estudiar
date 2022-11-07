@@ -19,28 +19,31 @@ function HomeScreen() {
   return (
     <div>
       <Row>
-        <Col md={8}>
-          <Row>
-            <Col>
-              <h6>STUDY ROOMS</h6>
-              <small>All the Rooms</small>
-            </Col>
-            <Col style={{textAlign: 'right'}}>
-              <Button
-                style={{backgroundColor: '#46B5D1', color: 'black'}}
-                className='btn-md'>
-                  <i className="fa-solid fa-plus"></i> Create Room
-              </Button>
-            </Col>
-          </Row>
-          <Row className='py-4'>
-            {rooms.map(room => (
-              <Col className='my-2' sm={6} key={room.id}>
-                <Room room={room} />
+        {loading ? <p>Loading....</p> :
+          error ? <p>Error...</p> : (
+            <Col md={8}>
+            <Row>
+              <Col>
+                <h6>STUDY ROOMS</h6>
+                <small>All the Rooms</small>
               </Col>
-            ))}
-          </Row>
-        </Col>
+              <Col style={{textAlign: 'right'}}>
+                <Button
+                  style={{backgroundColor: '#46B5D1', color: 'black'}}
+                  className='btn-md'>
+                    <i className="fa-solid fa-plus"></i> Create Room
+                </Button>
+              </Col>
+            </Row>
+            <Row className='py-4'>
+              {rooms.map(room => (
+                <Col className='my-2' sm={6} key={room.id}>
+                  <Room room={room} />
+                </Col>
+              ))}
+            </Row>
+          </Col>
+          )}
         <Col md={4}>
           <h6>RECENT ACTIVITY</h6>
         </Col>
