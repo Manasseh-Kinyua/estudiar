@@ -60,7 +60,7 @@ function SingleRoom() {
             <span className='py-2'>
               <Chip label={room.topic.name} variant="outlined" color="info" />
             </span>
-            <Card style={{width: '96%', margin: 'auto'}} className='mt-3 bg3'>
+            <Card style={{width: '96%', margin: 'auto'}} className='mt-3 bg3 mb-2'>
                 <span className='py-2'>
                   <strong>CONVERSATION</strong>
                 </span>
