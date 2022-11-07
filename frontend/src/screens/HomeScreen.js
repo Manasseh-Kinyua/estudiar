@@ -4,6 +4,7 @@ import { Row, Col, Button } from 'react-bootstrap'
 import { listRooms } from '../actions/roomActions'
 import Room from '../components/Room'
 import Loader from '../components/Loader'
+import Message from '../components/Message'
 
 function HomeScreen() {
 
@@ -36,7 +37,7 @@ function HomeScreen() {
             </Row>
             <Row className='py-4'>
               {loading && <Loader />}
-              {error && <h3>error</h3>}
+              {error && <Message severity='error' error={error}/>}
               {rooms.map(room => (
                 <Col className='my-2' sm={6} key={room.id}>
                   <Room room={room} />

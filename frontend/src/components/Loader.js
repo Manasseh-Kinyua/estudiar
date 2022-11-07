@@ -4,7 +4,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 function Loader() {
   return (
     //   <CircularProgress style={{textAlign: 'center', width: '6rem', height: '6rem'}} color="success" />
-    <LinearProgress variant="determinate" color="info" />
+    <LinearProgress variant="determinate" value={100} color="info" />
   )
 }
 

@@ -28,7 +28,7 @@ function Room({room}) {
           <Card.Text>
             <Chip label={room.topic.name} variant="outlined" color="info" />
           </Card.Text>
-          <Card.Text as='div'>
+          <Card.Text>
             <div className='my-3'>
                 <Rating value={room.rating} text={`${room.numReviews} reviews`} color={'#f8e825'}/>
             </div>
