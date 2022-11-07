@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap'
 
 function Room() {
   return (
-      <Card>
+      <Card style={{backgroundColor: 'rgb(1, 15, 32)'}}>
         room card
       </Card>
   )

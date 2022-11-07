@@ -11,9 +11,17 @@ z-index: 5;
 }
 
 .bg {
-background: rgb(1, 15, 32);
+  background: rgb(1, 15, 32);
 }
 
 .footer {
 min-height: 20rem;
+}
+
+.app-btn {
+  background: rgb(15, 24, 26);
+}
+
+.white-text {
+  color: white;
 }
