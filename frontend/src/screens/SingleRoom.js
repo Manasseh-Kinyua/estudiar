@@ -65,13 +65,13 @@ function SingleRoom() {
                   <strong>CONVERSATION</strong>
                 </span>
                 {room.messages.map(message => (
-                  <Row>
+                  <Row style={{borderLeft: '.1rem solid rgb(1, 15, 32)', marginLeft: '1rem'}} className='my-1'>
                     <span style={{display: 'flex'}} className='py-2'>
                       <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
                       <small style={{color: '#46B5D1', padding: '5px'}}>@{message.user.username}</small>
                       <small style={{padding: '5px'}}>{message.created.substring(0,10)}</small>
                     </span>
-                    <span className='py-2 pl-3'>
+                    <span style={{marginLeft: '3rem'}} >
                       <p className='pl-3'>{message.body}</p>
                     </span>
                   </Row>
