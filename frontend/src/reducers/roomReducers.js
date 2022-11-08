@@ -3,27 +3,27 @@ import {
     ROOMS_LIST_SUCCESS,
     ROOMS_LIST_FAIL,
 
-    ROOMS_DETAILS_REQUEST,
-    ROOMS_DETAILS_SUCCESS,
-    ROOMS_DETAILS_FAIL,
+    ROOM_DETAIL_REQUEST,
+    ROOM_DETAIL_SUCCESS,
+    ROOM_DETAIL_FAIL,
 } from "../constants/roomConstants";
 
 export const roomListReducer = (state = {rooms:[]}, action) => {
     switch(action.type) {
         case ROOMS_LIST_REQUEST:
-            return{
+            return {
                 rooms: [],
                 loading: true,
             }
 
         case ROOMS_LIST_SUCCESS:
-            return{
+            return {
                 loading: false,
                 rooms: action.payload
             }
 
         case ROOMS_LIST_FAIL:
-            return{
+            return {
                 loading: false,
                 error: action.payload
             }
@@ -33,22 +33,22 @@ export const roomListReducer = (state = {rooms:[]}, action) => {
     }
 }
 
-export const roomDetailsReducer = (state = {room:{}}, action) => {
+export const roomDetailsReducer = (state = {room:{reviews:[], messages:[]}}, action) => {
     switch(action.type) {
-        case ROOMS_DETAILS_REQUEST:
-            return{
+        case ROOM_DETAIL_REQUEST:
+            return {
+                ...state,
                 loading: true,
-                ...state
             }
 
-        case ROOMS_DETAILS_SUCCESS:
-            return{
+        case ROOM_DETAIL_SUCCESS:
+            return {
                 loading: false,
                 room: action.payload
             }
 
-        case ROOMS_DETAILS_FAIL:
-            return{
+        case ROOM_DETAIL_FAIL:
+            return {
                 loading: false,
                 error: action.payload
             }
