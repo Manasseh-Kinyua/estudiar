@@ -1,19 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, Card, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { login } from '../actions/userActions'
 
 function LoginScreen() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    useEffect(() => {
+    const location = useLocation()
+    const searchParams = new URLSearchParams(location.search)
+    const redirect = searchParams.get('redirect') ? searchParams.get('redirect') : '/'
 
-    })
+    const navigate = useNavigate()
+
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector(state => state.userLogin)
+    const {loading, error, userInfo} = userLogin
+
+    useEffect(() => {
+        if(userInfo) {
+            navigate(redirect)
+        }
+    }, [userInfo, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault()
+
+        dispatch(login(email, password))
     }
 
   return (

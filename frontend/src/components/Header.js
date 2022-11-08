@@ -1,8 +1,13 @@
 import React from 'react'
 import { Navbar, Nav, Container, Row, Image, NavDropdown, Badge } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
+import { useSelector } from 'react-redux'
 
 function Header() {
+
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+
   return (
     <div>
       <header className='fixed-nav'>
@@ -19,9 +24,23 @@ function Header() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <LinkContainer to='/login'>
+
+                        {userInfo ? (
+                          <NavDropdown
+                          title={userInfo.name}
+                          id='username'>
+                              <LinkContainer
+                                  to='/profile'>
+                                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                              </LinkContainer>
+                              <NavDropdown.Item >Logout</NavDropdown.Item>
+                          </NavDropdown>
+                        ) : (
+                          <LinkContainer to='/login'>
                             <Nav.Link>LOGIN</Nav.Link>
                         </LinkContainer>
+                        )}
+                        
                         {/* <Nav.Link href="#" disabled>
                         Link
                         </Nav.Link> */}
