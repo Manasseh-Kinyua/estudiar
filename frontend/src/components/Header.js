@@ -2,6 +2,7 @@ import React from 'react'
 import { Navbar, Nav, Container, Row, Image, NavDropdown, Badge } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import { useSelector } from 'react-redux'
+import Avatar from '@mui/material/Avatar';
 
 function Header() {
 
@@ -26,15 +27,18 @@ function Header() {
                     >
 
                         {userInfo ? (
-                          <NavDropdown
-                          title={userInfo.name}
-                          id='username'>
-                              <LinkContainer
-                                  to='/profile'>
-                                      <NavDropdown.Item>Profile</NavDropdown.Item>
-                              </LinkContainer>
-                              <NavDropdown.Item >Logout</NavDropdown.Item>
-                          </NavDropdown>
+                          <div style={{display: 'flex'}}>
+                            <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
+                            <NavDropdown
+                            title={userInfo.name}
+                            id='username'>
+                                <LinkContainer
+                                    to='/profile'>
+                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                </LinkContainer>
+                                <NavDropdown.Item >Logout</NavDropdown.Item>
+                            </NavDropdown>
+                          </div>
                         ) : (
                           <LinkContainer to='/login'>
                             <Nav.Link>LOGIN</Nav.Link>
