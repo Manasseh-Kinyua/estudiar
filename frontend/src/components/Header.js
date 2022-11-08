@@ -1,13 +1,21 @@
 import React from 'react'
 import { Navbar, Nav, Container, Row, Image, NavDropdown, Badge } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Avatar from '@mui/material/Avatar';
+import SearchBox from './searchBox';
+import { logout } from '../actions/userActions';
 
 function Header() {
 
+  const dispatch = useDispatch()
+
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo} = userLogin
+
+  const logoutHandler = () => {
+    dispatch(logout())
+  }
 
   return (
     <div>
@@ -25,6 +33,17 @@ function Header() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
+                        <SearchBox  />
+
+                        <NavDropdown
+                            title='Admin'
+                            id='username'>
+                                <LinkContainer
+                                    to='/profile'>
+                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                </LinkContainer>
+                                <NavDropdown.Item >Logout</NavDropdown.Item>
+                            </NavDropdown>
 
                         {userInfo ? (
                           <div style={{display: 'flex'}}>
@@ -36,7 +55,7 @@ function Header() {
                                     to='/profile'>
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
                                 </LinkContainer>
-                                <NavDropdown.Item >Logout</NavDropdown.Item>
+                                <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
                             </NavDropdown>
                           </div>
                         ) : (
