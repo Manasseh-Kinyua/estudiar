@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Room
 from .serializers import RoomSerializer, UserSerializer, UserSerializerWithToken
+from django.contrib.auth.models import User
 
 # Create your views here.
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -37,6 +38,13 @@ def getRoutes(request):
 def getUserProfile(request):
     user = request.user
     serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUsers(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
