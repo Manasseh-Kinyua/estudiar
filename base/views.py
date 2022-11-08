@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Room
 from .serializers import RoomSerializer, UserSerializer, UserSerializerWithToken
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -25,13 +26,19 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-@api_view(['GET'])
-def getRoutes(request):
-    routes = [
-        'api/rooms',
-        'api/rooms/:id',
-    ]
-    return Response(routes)
+@api_view(['POST'])
+def registerUser(request):
+    data = request.data
+
+    user = User.objects.create(
+        first_name = data['name'],
+        email = data['email'],
+        username = data['email'],
+        password = make_password(data['password'])
+    )
+    serializer = UserSerializerWithToken(user, many=False)
+
+    return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
