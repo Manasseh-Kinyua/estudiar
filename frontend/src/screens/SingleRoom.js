@@ -24,7 +24,6 @@ function SingleRoom() {
   console.log(room)
 
   useEffect(() => {
-    console.log('component fired')
     dispatch(listRoomDetails(params.id))
   }, [dispatch, params.id])
   console.log(room)

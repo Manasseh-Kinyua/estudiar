@@ -20,7 +20,7 @@ function Room({room}) {
               <Link to={`/room/${room.id}`} style={{marginLeft: '.5rem'}}><i className="fa-solid fa-ellipsis-vertical"></i></Link>
             </Col>
           </Row>
-          <Link to={`room/${room.id}`}>
+          <Link to={`/room/${room.id}`}>
             <Card.Title>
               {room.name}
             </Card.Title>

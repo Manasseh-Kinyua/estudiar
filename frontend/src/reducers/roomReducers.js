@@ -33,11 +33,12 @@ export const roomListReducer = (state = {rooms:[]}, action) => {
     }
 }
 
-export const roomDetailsReducer = (state = {room:{reviews:[], messages:[]}}, action) => {
+export const roomDetailsReducer = (state = {room:{}}, action) => {
     switch(action.type) {
         case ROOM_DETAIL_REQUEST:
             return {
                 ...state,
+                room:{},
                 loading: true,
             }
 
