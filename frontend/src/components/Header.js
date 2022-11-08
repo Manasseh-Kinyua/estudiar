@@ -9,7 +9,7 @@ function Header() {
       <Navbar style={{minHeight: '10vh'}}  expand="lg" className='bg' collapseOnSelect>
             <Container>
                 <LinkContainer to='/'>
-                <Navbar.Brand><Image style={{width: '2rem'}} src='https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/50/48/e6/5048e628-43ca-3e5e-0f3b-c2aa4012de6f/source/512x512bb.jpg' alt='logo' /><strong>Estudiar</strong></Navbar.Brand>
+                  <Navbar.Brand><Image style={{width: '2rem'}} src='https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/50/48/e6/5048e628-43ca-3e5e-0f3b-c2aa4012de6f/source/512x512bb.jpg' alt='logo' /><strong>Estudiar</strong></Navbar.Brand>
                 </LinkContainer>
 
                 <Navbar.Toggle aria-controls="navbarScroll" />
@@ -19,9 +19,9 @@ function Header() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        {/* <LinkContainer to='/cart'> */}
-                            <Nav.Link><i className='fas fa-shopping-cart'></i> CART</Nav.Link>
-                        {/* </LinkContainer> */}
+                        <LinkContainer to='/login'>
+                            <Nav.Link>LOGIN</Nav.Link>
+                        </LinkContainer>
                         {/* <Nav.Link href="#" disabled>
                         Link
                         </Nav.Link> */}

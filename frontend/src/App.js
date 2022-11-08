@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScreen from './screens/HomeScreen';
 import SingleRoom from './screens/SingleRoom';
+import LoginScreen from './screens/LoginScreen';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Routes>
               <Route path='/' element={ <HomeScreen /> } />
               <Route path='/room/:id' element={ <SingleRoom /> } />
+              <Route path='/login' element={ <LoginScreen /> } />
             </Routes>
           </Container>
         </main>

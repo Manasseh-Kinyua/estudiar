@@ -31,3 +31,11 @@ min-height: 20rem;
 .white-text {
   color: white;
 }
+
+.form-p {
+  padding: 1.5rem;
+}
+
+.form-m {
+  margin: 1.5rem;
+}

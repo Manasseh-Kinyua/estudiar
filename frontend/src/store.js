@@ -7,6 +7,7 @@ import { userLoginReducer } from './reducers/userReducers'
 const reducer = combineReducers({
     roomList: roomListReducer,
     roomDetails: roomDetailsReducer,
+    
     userLogin: userLoginReducer,
 })
 
