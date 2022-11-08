@@ -3,6 +3,8 @@ import { Row, Col, Form, Card, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { login } from '../actions/userActions'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 
 function LoginScreen() {
 
@@ -37,10 +39,13 @@ function LoginScreen() {
       <Row className="justify-content-md-center my-5">
         
         <Col md={4}>
+            
             <Card style={{backgroundColor: 'rgb(1, 15, 32)', borderRadius: '1rem'}}>
                 <div className='bg2' style={{textAlign: 'center', padding: '.8rem', color: 'white', borderTopLeftRadius: '1rem', borderTopRightRadius: '1rem'}}>
                 <h6>SIGN IN</h6>
                 </div>
+                {loading && <Loader />}
+                {error && <Message severity='error' error={error} />}
               <Form className='form-p' onSubmit={submitHandler}>
                 <Form.Group className='form-m' controlId='email'>
                   <Form.Label>Email Address</Form.Label>

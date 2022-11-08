@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .models import Room
+from .models import Room, Topic
 from .serializers import RoomSerializer, UserSerializer, UserSerializerWithToken
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
@@ -68,4 +68,27 @@ def getRooms(request):
 def getRoom(request, pk):
     room = Room.objects.get(id=pk)
     serializer = RoomSerializer(room, many=False)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createRoom(request):
+    host = request.user
+    data = request.data
+
+    # create room
+    room = Room.objects.create(
+        host=host,
+        topic=data['topic'],
+        name=data['name'],
+        description=data['description']
+    )
+
+    # create topic
+    topic = Topic.objects.create(
+        name=data['topic']
+    )
+    
+    serializer = RoomSerializer(room, many=False)
+
     return Response(serializer.data)
