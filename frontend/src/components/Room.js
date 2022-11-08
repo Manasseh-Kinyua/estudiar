@@ -13,7 +13,7 @@ function Room({room}) {
           <Row className='pt-2 pb-4'>
             <Col style={{display: 'flex',justifyContent: 'spaceBetween', alignItems: 'center', color: '#46B5D1'}}>
               <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
-              <small style={{marginLeft: '4px'}}>@{room.host.username}</small>
+              <small style={{marginLeft: '4px'}}>@{room.host.name}</small>
             </Col>
             <Col style={{display: 'flex',justifyContent: 'spaceAround', alignItems: 'center'}} >
               <small style={{marginLeft: '7rem'}}>{room.created.substring(0,10)}</small>
