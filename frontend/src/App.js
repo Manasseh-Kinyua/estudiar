@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import HomeScreen from './screens/HomeScreen';
 import SingleRoom from './screens/SingleRoom';
 import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path='/' element={ <HomeScreen /> } />
               <Route path='/room/:id' element={ <SingleRoom /> } />
               <Route path='/login' element={ <LoginScreen /> } />
+              <Route path='/register' element={ <RegisterScreen /> } />
             </Routes>
           </Container>
         </main>
