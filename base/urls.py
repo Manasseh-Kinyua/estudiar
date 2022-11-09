@@ -12,6 +12,8 @@ urlpatterns = [
     path('rooms/', views.getRooms, name='get-rooms'),
     path('rooms/<str:pk>/', views.getRoom, name='get-room'),
 
+    path('messages/', views.getMessages, name='get-messages'),
+
 
     path('topics/', views.getTopics, name='get-topics'),
 ]

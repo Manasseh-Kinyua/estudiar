@@ -58,3 +58,29 @@ export const roomDetailsReducer = (state = {room:{}}, action) => {
             return state
     }
 }
+
+export const allMessagesReducer = (state = {messages:[]}, action) => {
+    switch(action.type) {
+        case ROOM_DETAIL_REQUEST:
+            return {
+                ...state,
+                room:{},
+                loading: true,
+            }
+
+        case ROOM_DETAIL_SUCCESS:
+            return {
+                loading: false,
+                room: action.payload
+            }
+
+        case ROOM_DETAIL_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}

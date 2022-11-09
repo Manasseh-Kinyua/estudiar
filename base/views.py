@@ -3,8 +3,8 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .models import Room, Topic
-from .serializers import RoomSerializer, UserSerializer, UserSerializerWithToken, TopicSerializer
+from .models import Room, Topic, Message
+from .serializers import RoomSerializer, UserSerializer, UserSerializerWithToken, TopicSerializer, MessageSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
@@ -75,6 +75,12 @@ def getRoom(request, pk):
 def getTopics(request):
     topic = Topic.objects.all()
     serializer = TopicSerializer(topic, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getMessages(request):
+    messages = Message.objects.all()
+    serializer = MessageSerializer(messages, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
