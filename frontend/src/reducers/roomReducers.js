@@ -6,6 +6,10 @@ import {
     ROOM_DETAIL_REQUEST,
     ROOM_DETAIL_SUCCESS,
     ROOM_DETAIL_FAIL,
+
+    MESSAGE_LIST_REQUEST,
+    MESSAGE_LIST_SUCCESS,
+    MESSAGE_LIST_FAIL,
 } from "../constants/roomConstants";
 
 export const roomListReducer = (state = {rooms:[]}, action) => {
@@ -61,20 +65,19 @@ export const roomDetailsReducer = (state = {room:{}}, action) => {
 
 export const allMessagesReducer = (state = {messages:[]}, action) => {
     switch(action.type) {
-        case ROOM_DETAIL_REQUEST:
+        case MESSAGE_LIST_REQUEST:
             return {
-                ...state,
-                room:{},
+                messages:[],
                 loading: true,
             }
 
-        case ROOM_DETAIL_SUCCESS:
+        case MESSAGE_LIST_SUCCESS:
             return {
                 loading: false,
-                room: action.payload
+                messages: action.payload
             }
 
-        case ROOM_DETAIL_FAIL:
+        case MESSAGE_LIST_FAIL:
             return {
                 loading: false,
                 error: action.payload

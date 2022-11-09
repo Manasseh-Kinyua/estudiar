@@ -1,11 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { roomDetailsReducer, roomListReducer } from './reducers/roomReducers'
+import { allMessagesReducer, roomDetailsReducer, roomListReducer } from './reducers/roomReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 
 const reducer = combineReducers({
     roomList: roomListReducer,
+    allMessages: allMessagesReducer,
     roomDetails: roomDetailsReducer,
     
     userLogin: userLoginReducer,
