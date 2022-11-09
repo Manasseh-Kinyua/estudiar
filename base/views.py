@@ -30,18 +30,19 @@ class MyTokenObtainPairView(TokenObtainPairView):
 @api_view(['POST'])
 def registerUser(request):
     data = request.data
+
     try:
         user = User.objects.create(
             first_name = data['name'],
-            email = data['email'],
             username = data['email'],
+            email = data['email'],
             password = make_password(data['password'])
         )
-        serializer = UserSerializerWithToken(user, many=False)
 
+        serializer = UserSerializerWithToken(user, many=False)
         return Response(serializer.data)
     except:
-        message = {'detail': 'User with this email already exists'}
+        message = {'detail': 'User With This Email Already Exists'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])

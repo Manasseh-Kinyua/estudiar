@@ -24,7 +24,7 @@ export const register = (name, email, password) => async (dispatch) => {
 
         const {data} = await axios.post(
             USER_REGISTER_ENDPOINT,
-            {'name': name, 'username': email, 'password': password},
+            {'name': name, 'email': email, 'password': password},
             config
         )
 

@@ -76,7 +76,7 @@ function LoginScreen() {
                     Sign In
                   </Button>
                 </span>
-                <strong style={{textAlign: 'center'}}>
+                <strong style={{display: 'flex', alignItems: 'center'}}>
                   Are you a new Customer? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Register</Link>
                 </strong>
               </Form>

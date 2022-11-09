@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Row, Col, Form, Card, Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { login, register } from '../actions/userActions'
+import { register } from '../actions/userActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
@@ -22,8 +22,10 @@ function RegisterScreen() {
 
     const dispatch = useDispatch()
 
-    const userLogin = useSelector(state => state.userLogin)
-    const {loading, error, userInfo} = userLogin
+    const userRegister = useSelector(state => state.userRegister)
+    const {loading, error, userInfo} = userRegister
+
+    console.log(email)
 
     useEffect(() => {
         if(userInfo) {
@@ -34,7 +36,11 @@ function RegisterScreen() {
     const submitHandler = (e) => {
         e.preventDefault()
 
-        dispatch(register(name, email, password))
+        if(password !== confirmPassword) {
+            setMessage('Passwords do not match')
+        } else {
+            dispatch(register(name, email, password))
+        }
     }
 
   return (
@@ -49,6 +55,7 @@ function RegisterScreen() {
                 </div>
                 {loading && <Loader />}
                 {error && <Message severity='error' error={error} />}
+                {message && <Message severity='success' error={message} />}
               <Form className='form-p' onSubmit={submitHandler}>
                 <Form.Group className='form-m' controlId='name'>
                   <Form.Label>Name</Form.Label>
@@ -101,9 +108,9 @@ function RegisterScreen() {
                     Register
                   </Button>
                 </span>
-                {/* <strong style={{textAlign: 'center'}}>
-                  Are tou a new Customer? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Register</Link>
-                </strong> */}
+                <strong style={{textAlign: 'center'}}>
+                  Already have an account? <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Login</Link>
+                </strong>
               </Form>
             </Card>
         </Col>
