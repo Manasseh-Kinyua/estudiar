@@ -38,6 +38,8 @@ class TopicSerializer(serializers.ModelSerializer):
 
 class MessageSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(read_only=True)
+    # room = serializers.SerializerMethodField(read_only=True)
+    # related_room = RoomSerializer(many=False, read_only=True)
 
     class Meta:
         model = Message
@@ -47,6 +49,11 @@ class MessageSerializer(serializers.ModelSerializer):
         user = obj.user
         serializer = UserSerializer(user, many=False)
         return serializer.data
+
+    # def get_room(self, obj):
+    #     room = obj.room
+    #     serializer = RoomSerializer(room, many=False)
+    #     return serializer.data
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
