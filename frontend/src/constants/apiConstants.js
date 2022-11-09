@@ -4,3 +4,4 @@ export const GET_ALL_ROOMS_ENDPOINT = `${BASE_URL}rooms/`
 export const GET_SINGLE_ROOM_ENDPOINT = `${BASE_URL}rooms/`
 
 export const USER_LOGIN_ENDPOINT = `${BASE_URL}users/login/`
+export const USER_REGISTER_ENDPOINT = `${BASE_URL}users/register/`

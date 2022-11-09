@@ -91,9 +91,9 @@ def createRoom(request):
     )
 
     # create topic
-    topic = Topic.objects.create(
-        name=data['topic']
-    )
+    # topic = Topic.objects.create(
+    #     name=data['topic']
+    # )
 
     serializer = RoomSerializer(room, many=False)
 
