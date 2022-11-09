@@ -16,7 +16,7 @@ function RegisterScreen() {
 
     const location = useLocation()
     const searchParams = new URLSearchParams(location.search)
-    const redirect = searchParams.get('redirect') ? searchParams.get('redirect') : '/'
+    const redirect = searchParams.get('redirect') 
 
     const navigate = useNavigate()
 
