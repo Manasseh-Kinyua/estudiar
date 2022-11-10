@@ -47,7 +47,7 @@ function HomeScreen() {
             <Row>
               <h6>Filters rooms by Topic:</h6>
               {topics.map(topic => (
-                <Col key={topic.id}>
+                <Col md={2} sm={2} lg={2} key={topic.id}>
                   <Chip component={'span'} label={topic.name} variant="outlined" color="info" style={{backgroundColor: 'rgb(1, 15, 32)', color: '#46B5D1'}} />
                 </Col>
               ))}

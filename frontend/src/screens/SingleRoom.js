@@ -9,7 +9,7 @@ import Avatar from '@mui/material/Avatar';
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Chip from '@mui/material/Chip';
-import axios from 'axios';
+import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 
 function SingleRoom() {
 
@@ -90,7 +90,7 @@ function SingleRoom() {
         </Col>
         <Col md={3}>
           <Row style={{padding: '.5rem', borderTopLeftRadius: '10px', borderTopRightRadius: '10px'}} className='bg2'>
-                <h6>PARTICIPANTS</h6>
+                <h6><PeopleOutlineIcon /> PARTICIPANTS ({room.participants && room.participants.length})</h6>
           </Row>
           <Row className='bg'>
                 {room.participants && room.participants.map(participant => (
