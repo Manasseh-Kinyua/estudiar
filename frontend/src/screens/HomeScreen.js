@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Button, Card } from 'react-bootstrap'
-import { listAllMessages, listRooms } from '../actions/roomActions'
+import { listAllMessages, listAllTopics, listRooms } from '../actions/roomActions'
 import Room from '../components/Room'
 import Loader from '../components/Loader'
 import Avatar from '@mui/material/Avatar';
 import Message from '../components/Message'
+import Chip from '@mui/material/Chip';
 
 function HomeScreen() {
 
@@ -17,9 +18,13 @@ function HomeScreen() {
     const allMessages = useSelector(state => state.allMessages)
     const {loading: loadingMessage, error: errorMessages, messages} = allMessages
 
+    const allTopics = useSelector(state => state.allTopics)
+    const {loading: loadingTopics, error: errorTopics, topics} = allTopics
+
     useEffect(() => {
         dispatch(listRooms())
         dispatch(listAllMessages())
+        dispatch(listAllTopics())
     }, [dispatch])
 
   return (
@@ -38,6 +43,14 @@ function HomeScreen() {
                     <i className="fa-solid fa-plus"></i> Create Room
                 </Button>
               </Col>
+            </Row>
+            <Row>
+              <h6>Filters rooms by Topic:</h6>
+              {topics.map(topic => (
+                <Col key={topic.id}>
+                  <Chip component={'span'} label={topic.name} variant="outlined" color="info" style={{backgroundColor: 'rgb(1, 15, 32)', color: '#46B5D1'}} />
+                </Col>
+              ))}
             </Row>
             <Row className='py-4'>
               {loading && <Loader />}
