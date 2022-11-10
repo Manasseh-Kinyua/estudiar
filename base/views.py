@@ -106,6 +106,8 @@ def createRoom(request):
 
     return Response(serializer.data)
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def createMessage(request, pk):
     user = request.user
     data = request.data
