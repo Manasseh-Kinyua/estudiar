@@ -83,7 +83,6 @@ export const messageCreateReducer = (state = {}, action) => {
             return {
                 loading: false,
                 success: true,
-                // message: action.payload
             }
 
         case MESSAGE_CREATE_FAIL:
