@@ -35,15 +35,28 @@ function Header() {
                     >
                         <SearchBox  />
 
-                        <NavDropdown
+                        {userInfo && userInfo.isAdmin && (
+                            <NavDropdown
                             title='Admin'
                             id='username'>
                                 <LinkContainer
-                                    to='/profile'>
-                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                    to='/admin/userlist'>
+                                        <NavDropdown.Item>Users</NavDropdown.Item>
                                 </LinkContainer>
-                                <NavDropdown.Item >Logout</NavDropdown.Item>
-                            </NavDropdown>
+                                <LinkContainer
+                                    to='/admin/roomlist'>
+                                        <NavDropdown.Item>Rooms</NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer
+                                    to='/admin/messagelist'>
+                                        <NavDropdown.Item>Messages</NavDropdown.Item>
+                                </LinkContainer>
+                                <LinkContainer
+                                    to='/admin/reviewlist'>
+                                        <NavDropdown.Item>Reviews</NavDropdown.Item>
+                                </LinkContainer>
+                          </NavDropdown>
+                        )}
 
                         {userInfo ? (
                           <div style={{display: 'flex'}}>

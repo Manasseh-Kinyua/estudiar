@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import SingleRoom from './screens/SingleRoom';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import UserList from './screens/UserList';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path='/room/:id' element={ <SingleRoom /> } />
               <Route path='/login' element={ <LoginScreen /> } />
               <Route path='/register' element={ <RegisterScreen /> } />
+              <Route path='/admin/userlist' element={ <UserList /> } />
             </Routes>
           </Container>
         </main>
