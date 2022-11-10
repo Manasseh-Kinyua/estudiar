@@ -8,6 +8,7 @@ import SingleRoom from './screens/SingleRoom';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import UserList from './screens/UserList';
+import RoomListScreen from './screens/RoomListScreen';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path='/login' element={ <LoginScreen /> } />
               <Route path='/register' element={ <RegisterScreen /> } />
               <Route path='/admin/userlist' element={ <UserList /> } />
+              <Route path='/admin/roomlist' element={ <RoomListScreen /> } />
             </Routes>
           </Container>
         </main>
