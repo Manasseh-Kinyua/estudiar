@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { allMessagesReducer, allTopicsReducer, messageCreateReducer, roomDetailsReducer, roomListReducer } from './reducers/roomReducers'
-import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
+import { userListReducer, userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 
 const reducer = combineReducers({
     roomList: roomListReducer,
@@ -13,6 +13,7 @@ const reducer = combineReducers({
     
     userLogin: userLoginReducer,
     userRegister: userRegisterReducer,
+    userList: userListReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
