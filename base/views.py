@@ -74,7 +74,7 @@ def getRoom(request, pk):
 @api_view(['GET'])
 def getTopics(request):
     topic = Topic.objects.all()
-    serializer = TopicSerializer(topic, many=False)
+    serializer = TopicSerializer(topic, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])

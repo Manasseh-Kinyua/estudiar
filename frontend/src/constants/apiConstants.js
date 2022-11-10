@@ -7,3 +7,5 @@ export const USER_LOGIN_ENDPOINT = `${BASE_URL}users/login/`
 export const USER_REGISTER_ENDPOINT = `${BASE_URL}users/register/`
 
 export const GET_ALL_MESSAGES_ENDPOINT = `${BASE_URL}messages/`
+
+export const GET_ALL_TOPICS_ENDPOINT = `${BASE_URL}topics/`

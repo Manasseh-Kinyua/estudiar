@@ -10,6 +10,10 @@ import {
     MESSAGE_LIST_REQUEST,
     MESSAGE_LIST_SUCCESS,
     MESSAGE_LIST_FAIL,
+
+    TOPIC_LIST_REQUEST,
+    TOPIC_LIST_SUCCESS,
+    TOPIC_LIST_FAIL,
 } from "../constants/roomConstants";
 
 export const roomListReducer = (state = {rooms:[]}, action) => {
@@ -78,6 +82,31 @@ export const allMessagesReducer = (state = {messages:[]}, action) => {
             }
 
         case MESSAGE_LIST_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const allTopicsReducer = (state = {topics:[]}, action) => {
+    switch(action.type) {
+        case TOPIC_LIST_REQUEST:
+            return {
+                topics:[],
+                loading: true,
+            }
+
+        case TOPIC_LIST_SUCCESS:
+            return {
+                loading: false,
+                topics: action.payload
+            }
+
+        case TOPIC_LIST_FAIL:
             return {
                 loading: false,
                 error: action.payload
