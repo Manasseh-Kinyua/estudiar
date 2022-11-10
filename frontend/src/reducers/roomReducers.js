@@ -11,6 +11,10 @@ import {
     MESSAGE_LIST_SUCCESS,
     MESSAGE_LIST_FAIL,
 
+    MESSAGE_CREATE_REQUEST,
+    MESSAGE_CREATE_SUCCESS,
+    MESSAGE_CREATE_FAIL,
+
     TOPIC_LIST_REQUEST,
     TOPIC_LIST_SUCCESS,
     TOPIC_LIST_FAIL,
@@ -57,6 +61,32 @@ export const roomDetailsReducer = (state = {room:{}}, action) => {
             }
 
         case ROOM_DETAIL_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const createMessageReducer = (state = {}, action) => {
+    switch(action.type) {
+        case MESSAGE_CREATE_REQUEST:
+            return {
+                messages:[],
+                loading: true,
+            }
+
+        case MESSAGE_CREATE_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                message: action.payload
+            }
+
+        case MESSAGE_CREATE_FAIL:
             return {
                 loading: false,
                 error: action.payload
