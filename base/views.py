@@ -105,3 +105,18 @@ def createRoom(request):
     serializer = RoomSerializer(room, many=False)
 
     return Response(serializer.data)
+
+def createMessage(request, pk):
+    user = request.user
+    data = request.data
+    room = Room.objects.get(id=pk)
+
+    message = Message.objects.create(
+        user=user,
+        room=room,
+        body=data['post']
+    )
+
+    serializer = MessageSerializer(message, many=False)
+
+    return Response(serializer.data)
