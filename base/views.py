@@ -116,6 +116,7 @@ def createMessage(request, pk):
         room=room,
         body=data['post']
     )
+    room.participants.add(user)
 
     serializer = MessageSerializer(message, many=False)
 
