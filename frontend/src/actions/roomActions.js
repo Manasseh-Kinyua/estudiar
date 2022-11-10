@@ -84,7 +84,7 @@ export const createMessage = (post) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.get(
+        const {data} = await axios.post(
             `${CREATE_MESSAGE_ENDPOINT}${post.id}/`,
             post,
             config

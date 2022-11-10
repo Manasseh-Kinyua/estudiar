@@ -71,7 +71,7 @@ export const roomDetailsReducer = (state = {room:{}}, action) => {
     }
 }
 
-export const createMessageReducer = (state = {}, action) => {
+export const messageCreateReducer = (state = {}, action) => {
     switch(action.type) {
         case MESSAGE_CREATE_REQUEST:
             return {
@@ -83,7 +83,7 @@ export const createMessageReducer = (state = {}, action) => {
             return {
                 loading: false,
                 success: true,
-                message: action.payload
+                // message: action.payload
             }
 
         case MESSAGE_CREATE_FAIL:

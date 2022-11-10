@@ -1,33 +1,51 @@
-import React, { useEffect } from 'react'
-import { Row, Col, Card  } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Row, Col, Card, Button  } from 'react-bootstrap'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { listRoomDetails } from '../actions/roomActions';
+import { createMessage, listRoomDetails } from '../actions/roomActions';
 import Avatar from '@mui/material/Avatar';
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Chip from '@mui/material/Chip';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
+import SendIcon from '@mui/icons-material/Send';
 
 function SingleRoom() {
 
+  const [post, setPost] = useState('')
+
   const params = useParams()
   const roomId = params.id
-  console.log(roomId)
 
   const dispatch = useDispatch()
 
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+  console.log(userInfo)
+
   const roomDetails = useSelector(state => state.roomDetails)
   const {loading, error, room} = roomDetails
-  
-  console.log(room)
 
+  const messageCreate = useSelector(state => state.messageCreate)
+  const {loading: loadingMessageCreate, error: errorMessageCreate, success: successMessageCreate} = messageCreate
+  
   useEffect(() => {
-    console.log('fired up')
+    if(successMessageCreate) {
+      setPost('')
+    }
     dispatch(listRoomDetails(roomId))
-  }, [dispatch, params.id])
+  }, [dispatch, params.id, successMessageCreate])
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+
+    dispatch(createMessage({
+      id: params.id,
+      post
+    }))
+  }
 
   return (
       <Row className='gap-5'>
@@ -82,6 +100,25 @@ function SingleRoom() {
                         </span>
                       </Row>
                     ))}
+
+                    {!userInfo ? (
+                      <span>
+                        <Message sevrity='info' error='You need to be logged in to engage in this room' />
+                      </span>
+                    ) : (
+                      <form onSubmit={submitHandler} className='post-holder'>
+                        <input
+                          className='post-input'
+                          value={post}
+                          onChange={(e) => setPost(e.target.value)}
+                          placeholder='Write your post here...'
+                          type='text'/>
+                          <button
+                            type='submit'>
+                              <SendIcon style={{color: '#46B5D1'}} />
+                          </button>
+                      </form>
+                    )}
                     
                 </Card>
               </Row>

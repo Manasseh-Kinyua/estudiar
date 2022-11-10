@@ -84,7 +84,7 @@ function HomeScreen() {
                     <p>replied to post in "{message.room}"</p>
                   </div>
                   <div className='bg4 my-1' style={{marginLeft: '2rem', borderRadius: '3px'}}>
-                    <p style={{padding: '1rem'}}>{message.body}</p>
+                    <p style={{padding: '1rem'}}>{message.body.substring(0,90)}...</p>
                   </div>
                 </div>
               </Card>

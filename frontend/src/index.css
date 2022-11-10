@@ -10,6 +10,26 @@ width: 100%;
 z-index: 5;
 }
 
+.post-holder {
+  width: 97%;
+  margin: 1rem auto;
+}
+.post-input {
+  width: 90%;
+  padding: 1rem;
+  background-color: #e8f3f7;
+  border: none;
+  border-radius: 400px;
+}
+ button {
+  border: none;
+  background-color: #effffe;
+}
+
+input:focus{
+  outline: none;
+}
+
 .bg {
   background: rgb(1, 15, 32);
 }
