@@ -94,7 +94,13 @@ function SingleRoom() {
           </Row>
           <Row className='bg'>
                 {room.participants && room.participants.map(participant => (
-                  <span key={participant.id}></span>
+                  <span style={{display: 'flex', alignItems: 'center', padding: '1rem'}} key={participant.id}>
+                    <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
+                    <div style={{display: 'flex', flexDirection: 'column', marginLeft: '3px' }} >
+                      <small className='blue-txt'>@{participant.name}</small>
+                      <small style={{fontSize: '10px'}} >{participant.username}</small>
+                    </div>
+                  </span>
                 ))}
           </Row>
         </Col>
