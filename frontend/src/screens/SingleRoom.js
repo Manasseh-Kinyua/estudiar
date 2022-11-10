@@ -30,7 +30,7 @@ function SingleRoom() {
   }, [dispatch, params.id])
 
   return (
-      <Row className='gap-2'>
+      <Row className='gap-5'>
         <Col  md={8}>
           {loading ? (
             <Loader />
@@ -91,6 +91,11 @@ function SingleRoom() {
         <Col md={3}>
           <Row style={{padding: '.5rem', borderTopLeftRadius: '10px', borderTopRightRadius: '10px'}} className='bg2'>
                 <h6>PARTICIPANTS</h6>
+          </Row>
+          <Row className='bg'>
+                {room.participants && room.participants.map(participant => (
+                  <span key={participant.id}></span>
+                ))}
           </Row>
         </Col>
       </Row>

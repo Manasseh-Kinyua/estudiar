@@ -65,6 +65,7 @@ class RoomSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
     host = serializers.SerializerMethodField(read_only=True)
     topic = serializers.SerializerMethodField(read_only=True)
+    participants = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Room
@@ -88,4 +89,9 @@ class RoomSerializer(serializers.ModelSerializer):
     def get_topic(self, obj):
         topic = obj.topic
         serializer = TopicSerializer(topic, many=False)
+        return serializer.data
+
+    def get_participants(self, obj):
+        participants = obj.participants
+        serializer = UserSerializer(participants, many=True)
         return serializer.data
