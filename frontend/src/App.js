@@ -9,6 +9,7 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import UserList from './screens/UserList';
 import RoomListScreen from './screens/RoomListScreen';
+import MessageListScreen from './screens/MessageListScreen';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path='/register' element={ <RegisterScreen /> } />
               <Route path='/admin/userlist' element={ <UserList /> } />
               <Route path='/admin/roomlist' element={ <RoomListScreen /> } />
+              <Route path='/admin/messagelist' element={ <MessageListScreen /> } />
             </Routes>
           </Container>
         </main>
