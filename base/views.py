@@ -66,6 +66,22 @@ def deleteUser(request, pk):
     user.delete()
     return Response('User has been deleted')
 
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def updateUser(request, pk):
+    user = User.objects.get(id=pk)
+    data = request.data
+
+    user.first_name=data['name']
+    user.username=data['email']
+    user.email=data['email']
+    user.is_staff=data['isAdmin']
+
+    serializer = UserSerializer(user, many=False)
+    
+    user.save()
+    return Response(serializer.data)
+
 @api_view(['GET'])
 def getRooms(request):
     rooms = Room.objects.all()
