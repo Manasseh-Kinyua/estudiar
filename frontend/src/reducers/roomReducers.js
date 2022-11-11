@@ -10,6 +10,7 @@ import {
     ROOM_CREATE_REQUEST,
     ROOM_CREATE_SUCCESS,
     ROOM_CREATE_FAIL,
+    ROOM_CREATE_RESET,
 
     MESSAGE_LIST_REQUEST,
     MESSAGE_LIST_SUCCESS,
@@ -94,6 +95,9 @@ export const roomCreateReducer = (state = {}, action) => {
                 loading: false,
                 error: action.payload
             }
+
+        case ROOM_CREATE_RESET:
+            return {}
 
         default:
             return state

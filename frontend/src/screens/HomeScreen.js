@@ -7,10 +7,14 @@ import Loader from '../components/Loader'
 import Avatar from '@mui/material/Avatar';
 import Message from '../components/Message'
 import Chip from '@mui/material/Chip';
+import { Link } from 'react-router-dom'
 
 function HomeScreen() {
 
     const dispatch = useDispatch()
+
+    const userLogin = useSelector(state => state.userLogin)
+    const {userInfo} = userLogin
 
     const roomList = useSelector(state => state.roomList)
     const {loading, error, rooms} = roomList
@@ -37,21 +41,35 @@ function HomeScreen() {
                 <small>All the Rooms</small>
               </Col>
               <Col style={{textAlign: 'right'}}>
-                <Button
-                  style={{backgroundColor: '#46B5D1', color: 'black'}}
-                  className='btn-md'>
-                    <i className="fa-solid fa-plus"></i> Create Room
-                </Button>
+                {userInfo ? (
+                  <Link to='/room/create'>
+                    <Button
+                      disabled={!userInfo}
+                      style={{backgroundColor: '#46B5D1', color: 'black'}}
+                      className='btn-md'>
+                        <i className="fa-solid fa-plus"></i> Create Room
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button
+                      disabled={!userInfo}
+                      style={{backgroundColor: '#46B5D1', color: 'black'}}
+                      className='btn-md'>
+                        <i className="fa-solid fa-plus"></i> Login to Create Room
+                  </Button>
+                )}
               </Col>
             </Row>
-            <Row>
+            <div >
               <h6>Filters rooms by Topic:</h6>
               {topics.map(topic => (
-                <Col md={2} sm={2} lg={2} key={topic.id}>
-                  <Chip component={'span'} label={topic.name} variant="outlined" color="info" style={{backgroundColor: 'rgb(1, 15, 32)', color: '#46B5D1'}} />
-                </Col>
+                // <Col md={2} sm={2} lg={2} key={topic.id}>
+                  <span key={topic.id} style={{margin:'1rem'}}>
+                    <Chip component={'span'} label={topic.name} variant="outlined" color="info" style={{backgroundColor: 'rgb(1, 15, 32)', color: '#46B5D1', margin:'.1rem'}} />
+                  </span>
+                // {/* </Col> */}
               ))}
-            </Row>
+            </div>
             <Row className='py-4'>
               {loading && <Loader />}
               {error && <Message severity='error' error={error}/>}
