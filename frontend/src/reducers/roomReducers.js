@@ -85,6 +85,7 @@ export const roomCreateReducer = (state = {}, action) => {
         case ROOM_CREATE_SUCCESS:
             return {
                 loading: false,
+                success: true,
                 room: action.payload
             }
 
