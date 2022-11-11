@@ -12,6 +12,11 @@ import {
     ROOM_CREATE_FAIL,
     ROOM_CREATE_RESET,
 
+    ROOM_EDIT_REQUEST,
+    ROOM_EDIT_SUCCESS,
+    ROOM_EDIT_FAIL,
+    ROOM_EDIT_RESET,
+
     MESSAGE_LIST_REQUEST,
     MESSAGE_LIST_SUCCESS,
     MESSAGE_LIST_FAIL,
@@ -97,6 +102,34 @@ export const roomCreateReducer = (state = {}, action) => {
             }
 
         case ROOM_CREATE_RESET:
+            return {}
+
+        default:
+            return state
+    }
+}
+
+export const roomEditReducer = (state = {}, action) => {
+    switch(action.type) {
+        case ROOM_EDIT_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case ROOM_EDIT_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                room: action.payload
+            }
+
+        case ROOM_EDIT_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case ROOM_EDIT_RESET:
             return {}
 
         default:

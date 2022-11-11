@@ -23,7 +23,6 @@ function SingleRoom() {
 
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo} = userLogin
-  console.log(userInfo)
 
   const roomDetails = useSelector(state => state.roomDetails)
   const {loading, error, room} = roomDetails
