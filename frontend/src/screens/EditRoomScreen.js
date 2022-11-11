@@ -5,7 +5,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { editRoom, listRoomDetails } from '../actions/roomActions'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ROOM_EDIT_RESET } from '../constants/roomConstants'
+import { ROOM_DETAIL_RESET, ROOM_EDIT_RESET } from '../constants/roomConstants'
 
 function EditRoomScreen() {
 
@@ -25,15 +25,20 @@ function EditRoomScreen() {
     const {loading: loadingEdit, success: successEdit, error: errorEdit} = roomEdit
 
     useEffect(() => {
+        
         if(successEdit) {
             navigate('/')
             dispatch({type: ROOM_EDIT_RESET})
         } else {
-            dispatch(listRoomDetails(params.id))
-            setName(room.name)
-            setDescription(room.description)
+            if(!room || !room.name || room.id !== Number(params.id)) {
+              dispatch(listRoomDetails(params.id))
+            } else {
+              setName(room.name && room.name)
+              setDescription(room.description && room.description)
+            }
+            
         }
-    }, [navigate, successEdit])
+    }, [navigate, successEdit, dispatch])
 
     const submitHandler = (e) => {
         e.preventDefault()

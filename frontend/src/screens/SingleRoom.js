@@ -39,6 +39,8 @@ function SingleRoom() {
   useEffect(() => {
     if(successMessageCreate || successCreateReview) {
       setPost('')
+      setRating(0)
+      setComment('')
     }
     dispatch(listRoomDetails(roomId))
   }, [dispatch, params.id, successMessageCreate, successCreateReview])

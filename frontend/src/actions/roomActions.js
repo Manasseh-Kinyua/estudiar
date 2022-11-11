@@ -31,6 +31,7 @@ import {
     TOPIC_LIST_REQUEST,
     TOPIC_LIST_SUCCESS,
     TOPIC_LIST_FAIL,
+    ROOM_DETAIL_RESET,
 } from "../constants/roomConstants";
 import { CREATE_MESSAGE_ENDPOINT, CREATE_ROOM_ENDPOINT, CREATE_ROOM_REVIEW_ENDPOINT, EDIT_ROOM_ENDPOINT, GET_ALL_MESSAGES_ENDPOINT, GET_ALL_ROOMS_ENDPOINT, GET_ALL_TOPICS_ENDPOINT } from "../constants/apiConstants";
 import { GET_SINGLE_ROOM_ENDPOINT } from "../constants/apiConstants";
@@ -178,6 +179,10 @@ export const editRoom = (room) => async (dispatch, getState) => {
             )
         dispatch({
             type: ROOM_EDIT_SUCCESS,
+            payload: data
+        })
+        dispatch({
+            type: ROOM_DETAIL_SUCCESS,
             payload: data
         })
 

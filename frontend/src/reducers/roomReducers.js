@@ -6,6 +6,7 @@ import {
     ROOM_DETAIL_REQUEST,
     ROOM_DETAIL_SUCCESS,
     ROOM_DETAIL_FAIL,
+    ROOM_DETAIL_RESET,
 
     ROOM_CREATE_REQUEST,
     ROOM_CREATE_SUCCESS,
@@ -80,6 +81,9 @@ export const roomDetailsReducer = (state = {room:{}}, action) => {
                 loading: false,
                 error: action.payload
             }
+
+        case ROOM_DETAIL_RESET:
+            return {room: {}}
 
         default:
             return state
