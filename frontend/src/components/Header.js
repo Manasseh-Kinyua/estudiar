@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import Avatar from '@mui/material/Avatar';
 import SearchBox from './searchBox';
 import { logout } from '../actions/userActions';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
+
+  const navigate = useNavigate()
 
   const dispatch = useDispatch()
 
@@ -15,6 +18,7 @@ function Header() {
 
   const logoutHandler = () => {
     dispatch(logout())
+    navigate('/login')
   }
 
   return (

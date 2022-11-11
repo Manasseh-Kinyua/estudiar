@@ -7,8 +7,14 @@ import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Rating from './Rating';
+import { useSelector } from 'react-redux'
 
 function Room({room}) {
+
+  const userLogin = useSelector(state => state.userLogin)
+  const {userInfo} = userLogin
+  console.log(userInfo)
+
   return (
       <Card style={{backgroundColor: 'rgb(1, 15, 32)', }}>
         <Card.Body>
@@ -40,12 +46,14 @@ function Room({room}) {
             <span>
               <PeopleOutlineIcon /> {room.participants.length} joined
             </span>
-            <span>
+            {userInfo && userInfo.name == room.host.name && (
+              <span>
               <Link to={`/room/edit/${room.id}`} className='mx-3'>
                 <EditIcon />
               </Link>
               <DeleteIcon />
             </span>
+            )}
         </Card.Text>
         </Card.Body>
       </Card>
