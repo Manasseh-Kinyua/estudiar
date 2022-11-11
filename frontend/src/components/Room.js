@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import Rating from './Rating';
 
 function Room({room}) {
@@ -34,8 +36,16 @@ function Room({room}) {
             </div>
         </Card.Text>
         <hr style={{height: '1px', backgroundColor: 'white', color: 'white'}} />
-        <Card.Text as='div'>
-            <PeopleOutlineIcon /> {room.participants.length} joined
+        <Card.Text style={{display:'flex', justifyContent:'space-between'}} as='div'>
+            <span>
+              <PeopleOutlineIcon /> {room.participants.length} joined
+            </span>
+            <span>
+              <Link to={`/room/edit/${room.id}`} className='mx-3'>
+                <EditIcon />
+              </Link>
+              <DeleteIcon />
+            </span>
         </Card.Text>
         </Card.Body>
       </Card>

@@ -129,8 +129,8 @@ export const editRoom = (room) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.post(
-            EDIT_ROOM_ENDPOINT,
+        const {data} = await axios.put(
+            `${EDIT_ROOM_ENDPOINT}${room.id}/`,
             room,
             config
             )
