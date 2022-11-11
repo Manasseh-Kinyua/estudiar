@@ -101,6 +101,7 @@ def createRoom(request):
         description=data['description']
     )
     
+
     serializer = RoomSerializer(room, many=False)
 
     return Response(serializer.data)
