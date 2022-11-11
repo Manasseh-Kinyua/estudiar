@@ -125,7 +125,6 @@ export const roomCreateReviewReducer = (state = {}, action) => {
             return {
                 loading: false,
                 success: true,
-                review: action.payload
             }
 
         case ROOM_CREATE_REVIEW_FAIL:

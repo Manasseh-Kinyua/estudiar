@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Card, Button  } from 'react-bootstrap'
+import { Row, Col, Card, Button, Form  } from 'react-bootstrap'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { createMessage, listRoomDetails } from '../actions/roomActions';
+import { createMessage, createRoomReview, listRoomDetails } from '../actions/roomActions';
 import Avatar from '@mui/material/Avatar';
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Chip from '@mui/material/Chip';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
 import SendIcon from '@mui/icons-material/Send';
+import Rating from '../components/Rating';
 
 function SingleRoom() {
 
   const [post, setPost] = useState('')
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState('')
 
   const params = useParams()
   const roomId = params.id
@@ -29,13 +32,16 @@ function SingleRoom() {
 
   const messageCreate = useSelector(state => state.messageCreate)
   const {loading: loadingMessageCreate, error: errorMessageCreate, success: successMessageCreate} = messageCreate
+
+  const roomCreateReview = useSelector(state => state.roomCreateReview)
+  const {loading: loadingCreateReview, error: errorCreateReview, success: successCreateReview} = roomCreateReview
   
   useEffect(() => {
-    if(successMessageCreate) {
+    if(successMessageCreate || successCreateReview) {
       setPost('')
     }
     dispatch(listRoomDetails(roomId))
-  }, [dispatch, params.id, successMessageCreate])
+  }, [dispatch, params.id, successMessageCreate, successCreateReview])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -43,6 +49,15 @@ function SingleRoom() {
     dispatch(createMessage({
       id: params.id,
       post
+    }))
+  }
+
+  const createReviewHandler = (e) => {
+    e.preventDefault()
+
+    dispatch(createRoomReview({
+      id: params.id,
+      rating, comment
     }))
   }
 
@@ -138,6 +153,86 @@ function SingleRoom() {
                     </div>
                   </span>
                 ))}
+          </Row>
+          <Row style={{borderRadius: '20px'}} className='my-3'>
+            <span style={{borderTopLeftRadius: '20px', borderTopRightRadius: '20px'}} className='bg2 p-2'>
+              <strong>WRITE A REVIEW</strong>
+            </span>
+            <span style={{borderBottomLeftRadius: '20px', borderBottomRightRadius: '20px'}} className='bg'>
+                {userInfo ? (
+                  
+                  <Form onSubmit={createReviewHandler} className='p-3'>
+                    {loadingCreateReview && <Loader/>}
+                    {errorCreateReview && <Message severity='error' error={errorCreateReview} />}
+                  <Form.Group controlId='rating'>
+                    <Row>
+                      <Col md={4}><Form.Label>Rating</Form.Label></Col>
+                      <Col md={8}>
+                        <Form.Control
+                                as='select'
+                                value={rating}
+                                onChange={(e) => setRating(e.target.value)}
+                                >
+                                  <option value=''>Select...</option>
+                                  <option value='1'>1 - Poor</option>
+                                  <option value='2'>2 - Fair</option>
+                                  <option value='3'>3 - Good</option>
+                                  <option value='4'>4 - Very Good</option>
+                                  <option value='5'>5 - Excellent</option>
+                              </Form.Control>
+                              </Col>
+                              </Row>
+                    </Form.Group>
+
+                    <Form.Group className='mt-2' controlId='comment'>
+                              <Row>
+                                <Col md={4}>
+                                <Form.Label>Review</Form.Label>
+                                </Col>
+                                <Col md={8}>
+                                  <Form.Control
+                                    as='textarea'
+                                    row='5'
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                    >
+
+                                  </Form.Control>
+                                </Col>
+                              </Row>
+                            </Form.Group>
+
+                            <Button
+                                // disabled={loadingProductReview}
+                                type='submit'
+                                style={{width: '100%', backgroundColor:'#46B5D1', color:'white'}}
+                                className='bg2 btn-small my-2'
+                                >
+                                  Review
+                              </Button>
+                </Form>
+                ) : (
+                  <Message severity='info' error='You need to be logged in in order to write a review' />
+                )}
+            </span>
+          </Row>
+
+          <Row>
+            <span style={{borderTopLeftRadius: '20px', borderTopRightRadius: '20px'}} className='bg2 p-2'>
+              <strong>REVIEWs</strong>
+            </span>
+            <section className='bg'>
+              {room.reviews && room.reviews.map(review => (
+                <Card style={{border:'1px solid grey', width:'90%', backgroundColor:'rgb(1, 15, 32)', lineHeight:'1rem'}} className='mx-2 my-2'>
+                  <span className='ml-2 p-2'>
+                    <strong className='blue-txt'>@{review.name}</strong>
+                    <Rating value={review.rating} color={'#f8e825'}/>
+                    <small>{review.created.substring(0,10)}</small>
+                    <p>{review.comment}</p>
+                  </span>
+                </Card>
+              ))}
+            </section>
           </Row>
         </Col>
       </Row>
