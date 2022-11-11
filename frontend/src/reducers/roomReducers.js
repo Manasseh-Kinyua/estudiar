@@ -7,6 +7,10 @@ import {
     ROOM_DETAIL_SUCCESS,
     ROOM_DETAIL_FAIL,
 
+    ROOM_CREATE_REQUEST,
+    ROOM_CREATE_SUCCESS,
+    ROOM_CREATE_FAIL,
+
     MESSAGE_LIST_REQUEST,
     MESSAGE_LIST_SUCCESS,
     MESSAGE_LIST_FAIL,
@@ -61,6 +65,30 @@ export const roomDetailsReducer = (state = {room:{}}, action) => {
             }
 
         case ROOM_DETAIL_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const roomCreateReducer = (state = {}, action) => {
+    switch(action.type) {
+        case ROOM_CREATE_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case ROOM_CREATE_SUCCESS:
+            return {
+                loading: false,
+                room: action.payload
+            }
+
+        case ROOM_CREATE_FAIL:
             return {
                 loading: false,
                 error: action.payload
