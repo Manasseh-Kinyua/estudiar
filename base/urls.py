@@ -17,4 +17,6 @@ urlpatterns = [
 
 
     path('topics/', views.getTopics, name='get-topics'),
+
+    path('reviews/create/', views.createRoomReview, name='create-review'),
 ]

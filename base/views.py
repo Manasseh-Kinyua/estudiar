@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from .models import Room, Topic, Message
+from .models import Room, Topic, Message, Review
 from .serializers import RoomSerializer, UserSerializer, UserSerializerWithToken, TopicSerializer, MessageSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
@@ -123,3 +123,46 @@ def createMessage(request, pk):
     serializer = MessageSerializer(message, many=False)
 
     return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createRoomReview(request, pk):
+    user = request.user
+    data = request.data
+    room = Room.objects.get(id=pk)
+
+    alreadyExists = room.review_set.filter(user=user).exists()
+
+    # check if review exists
+    if alreadyExists:
+        content = {'detail': 'Review already exists'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    # if review has no rating
+    elif data['rating'] == 0:
+        content = {'detail': 'Please selecta rating'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    # create Review
+    else:
+        review = Review.objects.create(
+            user=user,
+            room=room,
+            name=user.first_name,
+            rating=data['rating'],
+            comment=data['comment'],
+        )
+        
+        # set numReviews
+        reviews = room.review_set.all()
+        room.numReviews = len(reviews)
+
+        # set rating
+        total = 0
+        for i in reviews:
+            total += i.rating
+            room.rating = total / len(reviews)
+
+            room.save()
+
+            return Response('Review Created')
