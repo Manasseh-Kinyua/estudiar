@@ -79,7 +79,7 @@ def getTopics(request):
 
 @api_view(['GET'])
 def getMessages(request):
-    messages = Message.objects.all()
+    messages = Message.objects.all()[0:5]
     serializer = MessageSerializer(messages, many=True)
     return Response(serializer.data)
 
@@ -104,6 +104,20 @@ def createRoom(request):
 
     serializer = RoomSerializer(room, many=False)
 
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def editRoom(request, pk):
+    room = Room.objects.get(id=pk)
+    data = request.data
+
+    room.name = data['name']
+    room.description = data['description']
+
+    room.save()
+
+    serializer = RoomSerializer(room, many=False)
     return Response(serializer.data)
 
 @api_view(['POST'])

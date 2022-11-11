@@ -61,7 +61,7 @@ function HomeScreen() {
               </Col>
             </Row>
             <div >
-              <h6>Filters rooms by Topic:</h6>
+              <p>Filter rooms by Topic:</p>
               {topics.map(topic => (
                 // <Col md={2} sm={2} lg={2} key={topic.id}>
                   <span key={topic.id} style={{margin:'1rem'}}>
