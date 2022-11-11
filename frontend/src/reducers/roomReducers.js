@@ -12,6 +12,11 @@ import {
     ROOM_CREATE_FAIL,
     ROOM_CREATE_RESET,
 
+    ROOM_CREATE_REVIEW_REQUEST,
+    ROOM_CREATE_REVIEW_SUCCESS,
+    ROOM_CREATE_REVIEW_FAIL,
+    ROOM_CREATE_REVIEW_RESET,
+
     ROOM_EDIT_REQUEST,
     ROOM_EDIT_SUCCESS,
     ROOM_EDIT_FAIL,
@@ -102,6 +107,34 @@ export const roomCreateReducer = (state = {}, action) => {
             }
 
         case ROOM_CREATE_RESET:
+            return {}
+
+        default:
+            return state
+    }
+}
+
+export const roomCreateReviewReducer = (state = {}, action) => {
+    switch(action.type) {
+        case ROOM_CREATE_REVIEW_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case ROOM_CREATE_REVIEW_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+                review: action.payload
+            }
+
+        case ROOM_CREATE_REVIEW_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case ROOM_CREATE_REVIEW_RESET:
             return {}
 
         default:

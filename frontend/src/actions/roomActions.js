@@ -11,6 +11,11 @@ import {
     ROOM_CREATE_SUCCESS,
     ROOM_CREATE_FAIL,
 
+    ROOM_CREATE_REVIEW_REQUEST,
+    ROOM_CREATE_REVIEW_SUCCESS,
+    ROOM_CREATE_REVIEW_FAIL,
+    ROOM_CREATE_REVIEW_RESET,
+
     ROOM_EDIT_REQUEST,
     ROOM_EDIT_SUCCESS,
     ROOM_EDIT_FAIL,
@@ -27,7 +32,7 @@ import {
     TOPIC_LIST_SUCCESS,
     TOPIC_LIST_FAIL,
 } from "../constants/roomConstants";
-import { CREATE_MESSAGE_ENDPOINT, CREATE_ROOM_ENDPOINT, EDIT_ROOM_ENDPOINT, GET_ALL_MESSAGES_ENDPOINT, GET_ALL_ROOMS_ENDPOINT, GET_ALL_TOPICS_ENDPOINT } from "../constants/apiConstants";
+import { CREATE_MESSAGE_ENDPOINT, CREATE_ROOM_ENDPOINT, CREATE_ROOM_REVIEW_ENDPOINT, EDIT_ROOM_ENDPOINT, GET_ALL_MESSAGES_ENDPOINT, GET_ALL_ROOMS_ENDPOINT, GET_ALL_TOPICS_ENDPOINT } from "../constants/apiConstants";
 import { GET_SINGLE_ROOM_ENDPOINT } from "../constants/apiConstants";
 import axios from 'axios'
 
@@ -105,6 +110,43 @@ export const createRoom = (room) => async (dispatch, getState) => {
     }catch(error) {
         dispatch({
             type: ROOM_CREATE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message
+        })
+    }
+} 
+
+export const createRoomReview = (review) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: ROOM_CREATE_REVIEW_REQUEST
+        })
+
+        const {
+            userLogin: {userInfo}
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.post(
+            `${CREATE_ROOM_REVIEW_ENDPOINT}${review.id}/`,
+            review,
+            config
+            )
+        dispatch({
+            type: ROOM_CREATE_REVIEW_SUCCESS,
+            payload: data
+        })
+
+    }catch(error) {
+        dispatch({
+            type: ROOM_CREATE_REVIEW_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message
