@@ -20,6 +20,7 @@ function EditRoomScreen() {
 
     const roomDetails = useSelector(state => state.roomDetails)
     const {loading, room, error} = roomDetails
+    console.log(room)
 
     const roomEdit = useSelector(state => state.roomEdit)
     const {loading: loadingEdit, success: successEdit, error: errorEdit} = roomEdit
@@ -30,11 +31,11 @@ function EditRoomScreen() {
             navigate('/')
             dispatch({type: ROOM_EDIT_RESET})
         } else {
-            if(!room || !room.name || room.id !== Number(params.id)) {
+            if(!room.name || !room.description || room.id !== Number(params.id)) {
               dispatch(listRoomDetails(params.id))
             } else {
-              setName(room.name && room.name)
-              setDescription(room.description && room.description)
+              setName(room.name)
+              setDescription(room.description)
             }
             
         }

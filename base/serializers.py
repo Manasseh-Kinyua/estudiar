@@ -3,13 +3,25 @@ from .models import Topic, Room, Message, Review
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 
+class MessagesForProfile(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = '__all__'
+
+class RoomSerializerForRoom(serializers.ModelSerializer):
+    class Meta:
+        model = Room
+        fields = '__all__'
+
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
+    rooms = serializers.SerializerMethodField(read_only=True)
+    messages = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'name', 'isAdmin']
+        fields = ['id', 'username', 'email', 'name', 'isAdmin', 'rooms', 'messages']
 
     def get_name(self, obj):
         name = obj.first_name
@@ -19,6 +31,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_isAdmin(self, obj):
         return obj.is_staff
+
+    def get_rooms(self, obj):
+        rooms = obj.room_set.all()
+        serializer = RoomSerializerForRoom(rooms, many=True)
+        return serializer.data
+
+    def get_messages(self, obj):
+        messages = obj.message_set.all()
+        serializer = MessagesForProfile(messages, many=True)
+        return serializer.data
+
 
 class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only=True)

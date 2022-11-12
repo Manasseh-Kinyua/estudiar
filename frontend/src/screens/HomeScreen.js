@@ -99,7 +99,7 @@ function HomeScreen() {
                 </div>
                 <div>
                   <div style={{marginLeft: '2rem'}}>
-                    <p>replied to post in " {message.room.name} "</p>
+                    <p>replied to post a in " {message.room.name} "</p>
                   </div>
                   <div className='bg4 my-1' style={{marginLeft: '2rem', borderRadius: '3px'}}>
                     <p style={{padding: '1rem'}}>{message.body.substring(0,90)}...</p>

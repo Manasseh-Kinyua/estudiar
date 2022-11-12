@@ -13,7 +13,6 @@ function Room({room}) {
 
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo} = userLogin
-  console.log(userInfo)
 
   return (
       <Card style={{backgroundColor: 'rgb(1, 15, 32)', }}>
