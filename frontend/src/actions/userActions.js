@@ -188,7 +188,7 @@ export const editUserProfile = (user) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.get(
+        const {data} = await axios.put(
             EDIT_USER_PROFILE_ENDPOINT,
             user,
             config

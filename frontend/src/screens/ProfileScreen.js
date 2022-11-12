@@ -4,9 +4,10 @@ import { Row, Col, Form, Button, Card } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Room from '../components/Room'
-import { getUserProfile } from '../actions/userActions'
+import { editUserProfile, getUserProfile } from '../actions/userActions'
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
+import { useNavigate } from 'react-router-dom'
 
 function ProfileScreen() {
 
@@ -16,20 +17,41 @@ function ProfileScreen() {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState('')
 
+    const navigate = useNavigate()
+
     const dispatch = useDispatch()
+
+    const userLogin = useSelector(state => state.userLogin)
+    const {userInfo} = userLogin
 
     const userProfile = useSelector(state => state.userProfile)
     const {loading, error, user} = userProfile
 
     useEffect(() => {
-      if(!user) {
-        dispatch(getUserProfile())
+      if(!userInfo) {
+        navigate('/login')
       } else {
-        setName(user.name)
-        setEmail(user.email)
+        if(!user) {
+          dispatch(getUserProfile())
+        } else {
+          setName(user.name)
+          setEmail(user.email)
+        }
       }
         
-    }, [dispatch])
+    }, [dispatch, navigate, user])
+
+    const submitHandler = (e) => {
+      e.preventDefault()
+
+      if(password !== confirmPassword) {
+        setMessage('Passwords do not match')
+      } else {
+        dispatch(editUserProfile({
+          name, email, password
+        }))
+      }
+    }
 
   return (
     <div>
@@ -45,7 +67,8 @@ function ProfileScreen() {
             </div>
             <div className='my-5' style={{width:'100%', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
               <h6>INFO/UPDATE</h6>
-              <form className='p-form'>
+              <form onSubmit={submitHandler} className='p-form'>
+                {message && <Message severity='info' error={message} />}
                 <div>
                   <input
                     type='text'
