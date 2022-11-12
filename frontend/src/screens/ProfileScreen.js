@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Form, Button, Card } from 'react-bootstrap'
 import Loader from '../components/Loader'
@@ -10,13 +10,25 @@ import Chip from '@mui/material/Chip';
 
 function ProfileScreen() {
 
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [message, setMessage] = useState('')
+
     const dispatch = useDispatch()
 
     const userProfile = useSelector(state => state.userProfile)
     const {loading, error, user} = userProfile
 
     useEffect(() => {
+      if(!user) {
         dispatch(getUserProfile())
+      } else {
+        setName(user.name)
+        setEmail(user.email)
+      }
+        
     }, [dispatch])
 
   return (
@@ -30,6 +42,36 @@ function ProfileScreen() {
               <h5 className='blue-txt'>@{user && user.name}</h5>
               <p>@{user && user.username}</p>
                 <Chip component={'span'} label={user && user.name} variant="outlined" color="info" />
+            </div>
+            <div className='my-5' style={{width:'100%', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+              <h6>INFO/UPDATE</h6>
+              <form className='p-form'>
+                <div>
+                  <input
+                    type='text'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}/>
+                  <input
+                    type='email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}/>
+                </div>
+                <div>
+                  <input
+                    placeholder='enter new password'
+                    type='password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}/>
+                  <input
+                    placeholder='confirm new password'
+                    type='password'
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}/>
+                </div>
+                <div style={{display:'flex', alignItems:'center', justifyContent:'center'}}>
+                  <button>Update</button>
+                </div>
+              </form>
             </div>
             <Row className='gap-1 my-5'>
               <h6>ROOMS HOSTED</h6>

@@ -3,6 +3,25 @@ main {
   margin-top: 6rem;
 }
 
+.p-form button {
+  color: #46B5D1;
+  border-radius: 50px;
+  text-align: center;
+  padding: .5rem 2rem;
+  border: .1rem solid #46B5D1;
+}
+.p-form div {
+  display: flex;
+  width: 100%;
+}
+.p-form div input {
+  border: none;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: #e6f6fa;
+  border-radius: 10px;
+}
+
 .fixed-nav {
 position: fixed;
 top: 0;
