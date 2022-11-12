@@ -9,6 +9,7 @@ export const EDIT_ROOM_ENDPOINT = `${BASE_URL}rooms/edit/`
 export const USER_LOGIN_ENDPOINT = `${BASE_URL}users/login/`
 export const USER_REGISTER_ENDPOINT = `${BASE_URL}users/register/`
 export const GET_ALL_USERS_ENDPOINT = `${BASE_URL}users/`
+export const GET_USER_PROFILE_ENDPOINT = `${BASE_URL}users/profile/`
 
 export const GET_ALL_MESSAGES_ENDPOINT = `${BASE_URL}messages/`
 export const CREATE_MESSAGE_ENDPOINT = `${BASE_URL}messages/create/`

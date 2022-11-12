@@ -11,6 +11,10 @@ import {
     USER_LIST_SUCCESS,
     USER_LIST_FAIL,
 
+    USER_PROFILE_REQUEST,
+    USER_PROFILE_SUCCESS,
+    USER_PROFILE_FAIL,
+
     USER_LOGOUT,
 } from "../constants/userConstants";
 
@@ -83,6 +87,30 @@ export const userListReducer = (state = {users:[]}, action) => {
             }
 
         case USER_LIST_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const userProfileReducer = (state = {}, action) => {
+    switch(action.type) {
+        case USER_PROFILE_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case USER_PROFILE_SUCCESS:
+            return {
+                loading: false,
+                user: action.payload,
+            }
+
+        case USER_PROFILE_FAIL:
             return {
                 loading: false,
                 error: action.payload
