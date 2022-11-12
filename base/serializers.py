@@ -8,10 +8,22 @@ class MessagesForProfile(serializers.ModelSerializer):
         model = Message
         fields = '__all__'
 
+class TopicSerializerForRoomInProfile(serializers.ModelSerializer):
+    class Meta:
+        model = Topic
+        fields = '__all__'
+
 class RoomSerializerForRoom(serializers.ModelSerializer):
+    topic = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Room
         fields = '__all__'
+
+    def get_topic(self, obj):
+        topic = obj.topic
+        serializer = TopicSerializerForRoomInProfile(topic, many=False)
+        return serializer.data
 
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
@@ -67,7 +79,6 @@ class TopicSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField(read_only=True)
     room = serializers.SerializerMethodField(read_only=True)
-    # related_room = RoomSerializer(many=False, read_only=True)
 
     class Meta:
         model = Message
