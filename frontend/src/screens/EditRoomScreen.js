@@ -20,7 +20,6 @@ function EditRoomScreen() {
 
     const roomDetails = useSelector(state => state.roomDetails)
     const {loading, room, error} = roomDetails
-    console.log(room)
 
     const roomEdit = useSelector(state => state.roomEdit)
     const {loading: loadingEdit, success: successEdit, error: errorEdit} = roomEdit
@@ -39,7 +38,7 @@ function EditRoomScreen() {
             }
             
         }
-    }, [navigate, successEdit, dispatch])
+    }, [dispatch, navigate, successEdit, params.id, room.name, room.description, room.id])
 
     const submitHandler = (e) => {
         e.preventDefault()

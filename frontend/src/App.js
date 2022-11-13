@@ -13,6 +13,7 @@ import MessageListScreen from './screens/MessageListScreen';
 import CreateRoomScreen from './screens/CreateRoomScreen';
 import EditRoomScreen from './screens/EditRoomScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import UserEditScreen from './screens/UserEditScreen';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path='/room/create' element={ <CreateRoomScreen /> } />
               <Route path='/room/edit/:id' element={ <EditRoomScreen /> } />
               <Route path='/admin/userlist' element={ <UserList /> } />
+              <Route path='/admin/user/:id/edit' element={ <UserEditScreen /> } />
               <Route path='/admin/roomlist' element={ <RoomListScreen /> } />
               <Route path='/admin/messagelist' element={ <MessageListScreen /> } />
             </Routes>
