@@ -111,7 +111,7 @@ def getRoom(request, pk):
     serializer = RoomSerializer(room, many=False)
     return Response(serializer.data)
 
-@api_view(['GET'])
+@api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteRoom(request, pk):
     room = Room.objects.get(id=pk)

@@ -6,7 +6,7 @@ import Message from '../components/Message'
 import { listUsers } from '../actions/userActions'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom'
-import { listRooms } from '../actions/roomActions'
+import { deleteRoom, listRooms } from '../actions/roomActions'
 
 function RoomListScreen() {
 
@@ -18,9 +18,16 @@ function RoomListScreen() {
     const roomList = useSelector(state => state.roomList)
     const {loading, error, rooms} = roomList
 
+    const roomDelete = useSelector(state => state.roomDelete)
+    const { success: successDelete } = roomDelete
+
     useEffect(() => {
         dispatch(listRooms())
-    },[dispatch])
+    },[dispatch, successDelete])
+
+    const deleteRoomHandler = (id) => {
+      dispatch(deleteRoom(id))
+    }
 
   return (
     <Row>
@@ -54,7 +61,7 @@ function RoomListScreen() {
                         <td>{room.messages.length}</td>
                         <td>{room.created.substring(0,10)}</td>
                         <td>
-                            <Button  className='btn-sm'>
+                            <Button onClick={() => deleteRoomHandler(room.id)} className='btn-sm'>
                                 <DeleteIcon style={{color:'red'}} />
                             </Button>
                         </td>
