@@ -15,13 +15,17 @@ import {
     USER_PROFILE_SUCCESS,
     USER_PROFILE_FAIL,
 
+    USER_DELETE_REQUEST,
+    USER_DELETE_SUCCESS,
+    USER_DELETE_FAIL,
+
     EDIT_USER_PROFILE_REQUEST,
     EDIT_USER_PROFILE_SUCCESS,
     EDIT_USER_PROFILE_FAIL,
 
     USER_LOGOUT,
 } from "../constants/userConstants";
-import { EDIT_USER_PROFILE_ENDPOINT, GET_ALL_USERS_ENDPOINT, GET_USER_PROFILE_ENDPOINT, USER_LOGIN_ENDPOINT, USER_REGISTER_ENDPOINT } from "../constants/apiConstants";
+import { DELETE_USER_PROFILE_ENDPOINT, EDIT_USER_PROFILE_ENDPOINT, GET_ALL_USERS_ENDPOINT, GET_USER_PROFILE_ENDPOINT, USER_LOGIN_ENDPOINT, USER_REGISTER_ENDPOINT } from "../constants/apiConstants";
 import axios from "axios";
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -206,6 +210,42 @@ export const editUserProfile = (user) => async (dispatch, getState) => {
     }catch(error) {
         dispatch({
             type: EDIT_USER_PROFILE_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message
+        })
+    }
+} 
+
+export const deleteUserProfile = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: USER_DELETE_REQUEST
+        })
+
+        const {
+            userLogin: {userInfo}
+        } = getState()
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const {data} = await axios.delete(
+            `${DELETE_USER_PROFILE_ENDPOINT}${id}`,
+            config
+            )
+        dispatch({
+            type: USER_DELETE_SUCCESS,
+            payload: data
+        })
+
+    }catch(error) {
+        dispatch({
+            type: USER_DELETE_FAIL,
             payload: error.response && error.response.data.detail
                 ? error.response.data.detail
                 : error.message
