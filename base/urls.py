@@ -19,6 +19,7 @@ urlpatterns = [
 
     path('messages/', views.getMessages, name='get-messages'),
     path('messages/create/<str:pk>/', views.createMessage, name='create-messages'),
+    path('messages/delete/<str:pk>/', views.deleteMessage, name='delete-messages'),
 
 
     path('topics/', views.getTopics, name='get-topics'),

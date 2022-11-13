@@ -4,7 +4,7 @@ import { Button, Row, Table } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { listAllMessages, listRooms } from '../actions/roomActions'
+import { deleteMessage, listAllMessages, listRooms } from '../actions/roomActions'
 import { MESSAGE_CREATE_SUCCESS } from '../constants/roomConstants'
 
 function MessageListScreen() {
@@ -17,9 +17,16 @@ function MessageListScreen() {
     const allMessages = useSelector(state => state.allMessages)
     const {loading, error, messages} = allMessages
 
+    const messageDelete = useSelector(state => state.messageDelete)
+    const {success: successDelete} = messageDelete
+
     useEffect(() => {
         dispatch(listAllMessages())
-    },[dispatch])
+    },[dispatch, successDelete])
+
+    const deleteMessageHandler = (id) => {
+      dispatch(deleteMessage(id))
+    }
 
   return (
     <Row>
@@ -45,11 +52,11 @@ function MessageListScreen() {
                     <tr key={message.id}>
                         <td>{message.id}</td>
                         <td>{message.user.name}</td>
-                        <td>{message.room}</td>
+                        <td>{message.room.name}</td>
                         <td>{message.body.substring(0,100)}...</td>
                         <td>{message.created.substring(0,10)}</td>
                         <td>
-                            <Button  className='btn-sm'>
+                            <Button onClick={() => deleteMessageHandler(message.id)} className='btn-sm'>
                                 <DeleteIcon style={{color:'red'}} />
                             </Button>
                         </td>

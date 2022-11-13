@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { allMessagesReducer, allTopicsReducer, messageCreateReducer, roomCreateReducer, roomCreateReviewReducer, roomDeleteReducer, roomDetailsReducer, roomEditReducer, roomListReducer } from './reducers/roomReducers'
+import { allMessagesReducer, allTopicsReducer, messageCreateReducer, messageDeleteReducer, roomCreateReducer, roomCreateReviewReducer, roomDeleteReducer, roomDetailsReducer, roomEditReducer, roomListReducer } from './reducers/roomReducers'
 import { deleteUserReducer, editUserProfileReducer, userListReducer, userLoginReducer, userProfileReducer, userRegisterReducer } from './reducers/userReducers'
 
 const reducer = combineReducers({
@@ -10,6 +10,7 @@ const reducer = combineReducers({
     roomCreateReview: roomCreateReviewReducer,
     roomEdit: roomEditReducer,
     messageCreate: messageCreateReducer,
+    messageDelete: messageDeleteReducer,
     allMessages: allMessagesReducer,
     allTopics: allTopicsReducer,
     roomDetails: roomDetailsReducer,

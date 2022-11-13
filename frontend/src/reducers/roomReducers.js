@@ -35,6 +35,10 @@ import {
     MESSAGE_CREATE_SUCCESS,
     MESSAGE_CREATE_FAIL,
 
+    MESSAGE_DELETE_REQUEST,
+    MESSAGE_DELETE_SUCCESS,
+    MESSAGE_DELETE_FAIL,
+
     TOPIC_LIST_REQUEST,
     TOPIC_LIST_SUCCESS,
     TOPIC_LIST_FAIL,
@@ -216,6 +220,30 @@ export const messageCreateReducer = (state = {}, action) => {
             }
 
         case MESSAGE_CREATE_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const messageDeleteReducer = (state = {}, action) => {
+    switch(action.type) {
+        case MESSAGE_DELETE_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case MESSAGE_DELETE_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+            }
+
+        case MESSAGE_DELETE_FAIL:
             return {
                 loading: false,
                 error: action.payload

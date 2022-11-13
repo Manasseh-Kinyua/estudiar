@@ -4,12 +4,13 @@ import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
-import { createMessage, createRoomReview, listRoomDetails } from '../actions/roomActions';
+import { createMessage, createRoomReview, deleteMessage, listRoomDetails } from '../actions/roomActions';
 import Avatar from '@mui/material/Avatar';
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Chip from '@mui/material/Chip';
 import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import Rating from '../components/Rating';
 
@@ -33,6 +34,9 @@ function SingleRoom() {
   const messageCreate = useSelector(state => state.messageCreate)
   const {loading: loadingMessageCreate, error: errorMessageCreate, success: successMessageCreate} = messageCreate
 
+  const messageDelete = useSelector(state => state.messageDelete)
+  const {success: successDelete} = messageDelete
+
   const roomCreateReview = useSelector(state => state.roomCreateReview)
   const {loading: loadingCreateReview, error: errorCreateReview, success: successCreateReview} = roomCreateReview
   
@@ -43,7 +47,7 @@ function SingleRoom() {
       setComment('')
     }
     dispatch(listRoomDetails(roomId))
-  }, [dispatch, params.id, successMessageCreate, successCreateReview])
+  }, [dispatch, roomId, successMessageCreate, successCreateReview])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -62,6 +66,10 @@ function SingleRoom() {
       rating, comment
     }))
   }
+
+  // const deleteMessageHandler = (id) => {
+  //   dispatch(deleteMessage(id))
+  // }
 
   return (
       <Row className='gap-5'>
@@ -110,6 +118,7 @@ function SingleRoom() {
                           <Avatar alt="Remy Sharp" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFNkJpg5tIB3DZsMqxgGCyRtSwDuav9LEdbZI06evMasI6tmkPahgI1ftvuA7qbHSsbgg&usqp=CAU" />
                           <small style={{color: '#46B5D1', padding: '5px'}}>@{message.user.name}</small>
                           <small style={{padding: '5px'}}>{message.created && message.created.substring(0,10)}</small>
+                          {/* <DeleteIcon onClick={(deleteMessageHandler(message.id))} /> */}
                         </span>
                         <span style={{marginLeft: '3rem'}} >
                           <p className='pl-3'>{message.body}</p>

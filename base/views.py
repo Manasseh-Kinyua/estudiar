@@ -130,6 +130,13 @@ def getMessages(request):
     serializer = MessageSerializer(messages, many=True)
     return Response(serializer.data)
 
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def deleteMessage(request, pk):
+    message = Message.objects.get(id=pk)
+    message.delete()
+    return Response('Message has been deleted')
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def createRoom(request):

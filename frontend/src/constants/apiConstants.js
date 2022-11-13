@@ -16,5 +16,6 @@ export const DELETE_USER_PROFILE_ENDPOINT = `${BASE_URL}users/delete/`
 
 export const GET_ALL_MESSAGES_ENDPOINT = `${BASE_URL}messages/`
 export const CREATE_MESSAGE_ENDPOINT = `${BASE_URL}messages/create/`
+export const DELETE_MESSAGE_ENDPOINT = `${BASE_URL}messages/delete/`
 
 export const GET_ALL_TOPICS_ENDPOINT = `${BASE_URL}topics/`
