@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Row, Table } from 'react-bootstrap'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { listUsers } from '../actions/userActions'
+import { deleteUserAction, listUsers } from '../actions/userActions'
 import Avatar from '@mui/material/Avatar';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -21,12 +21,15 @@ function UserList() {
     const userList = useSelector(state => state.userList)
     const {loading, error, users} = userList
 
+    const deleteUser = useSelector(state => state.deleteUser)
+    const {loading: loadingDelete, error: errorDelete, success: successDelete} = deleteUser
+
     useEffect(() => {
         dispatch(listUsers())
-    },[dispatch])
+    },[dispatch, successDelete])
 
     const deleteUserHandler = (id) => {
-      
+      dispatch(deleteUserAction(id))
     }
 
   return (

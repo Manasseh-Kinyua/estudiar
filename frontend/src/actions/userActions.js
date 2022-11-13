@@ -217,7 +217,7 @@ export const editUserProfile = (user) => async (dispatch, getState) => {
     }
 } 
 
-export const deleteUserProfile = (id) => async (dispatch, getState) => {
+export const deleteUserAction = (id) => async (dispatch, getState) => {
     try {
         dispatch({
             type: USER_DELETE_REQUEST
@@ -235,7 +235,7 @@ export const deleteUserProfile = (id) => async (dispatch, getState) => {
         }
 
         const {data} = await axios.delete(
-            `${DELETE_USER_PROFILE_ENDPOINT}${id}`,
+            `${DELETE_USER_PROFILE_ENDPOINT}${id}/`,
             config
             )
         dispatch({
