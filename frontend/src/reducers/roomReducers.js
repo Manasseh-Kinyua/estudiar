@@ -3,6 +3,10 @@ import {
     ROOMS_LIST_SUCCESS,
     ROOMS_LIST_FAIL,
 
+    ROOM_DELETE_REQUEST,
+    ROOM_DELETE_SUCCESS,
+    ROOM_DELETE_FAIL,
+
     ROOM_DETAIL_REQUEST,
     ROOM_DETAIL_SUCCESS,
     ROOM_DETAIL_FAIL,
@@ -167,6 +171,30 @@ export const roomEditReducer = (state = {}, action) => {
 
         case ROOM_EDIT_RESET:
             return {}
+
+        default:
+            return state
+    }
+}
+
+export const roomDeleteReducer = (state = {}, action) => {
+    switch(action.type) {
+        case ROOM_DELETE_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case ROOM_DELETE_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+            }
+
+        case ROOM_DELETE_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
 
         default:
             return state

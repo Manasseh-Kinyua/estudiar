@@ -5,6 +5,7 @@ export const GET_SINGLE_ROOM_ENDPOINT = `${BASE_URL}rooms/`
 export const CREATE_ROOM_ENDPOINT = `${BASE_URL}rooms/create/`
 export const CREATE_ROOM_REVIEW_ENDPOINT = `${BASE_URL}reviews/create/`
 export const EDIT_ROOM_ENDPOINT = `${BASE_URL}rooms/edit/`
+export const DELETE_ROOM_ENDPOINT = `${BASE_URL}rooms/delete/`
 
 export const USER_LOGIN_ENDPOINT = `${BASE_URL}users/login/`
 export const USER_REGISTER_ENDPOINT = `${BASE_URL}users/register/`
