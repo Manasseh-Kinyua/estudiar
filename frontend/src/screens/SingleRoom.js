@@ -234,7 +234,7 @@ function SingleRoom() {
             </span>
             <section className='bg'>
               {room.reviews && room.reviews.map(review => (
-                <Card style={{border:'1px solid grey', width:'90%', backgroundColor:'rgb(1, 15, 32)', lineHeight:'1rem'}} className='mx-2 my-2'>
+                <Card key={review.id} style={{border:'1px solid grey', width:'90%', backgroundColor:'rgb(1, 15, 32)', lineHeight:'1rem'}} className='mx-2 my-2'>
                   <span className='ml-2 p-2'>
                     <strong className='blue-txt'>@{review.name}</strong>
                     <Rating value={review.rating} color={'#f8e825'}/>
