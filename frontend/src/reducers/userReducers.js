@@ -15,6 +15,10 @@ import {
     USER_PROFILE_SUCCESS,
     USER_PROFILE_FAIL,
 
+    USER_DELETE_REQUEST,
+    USER_DELETE_SUCCESS,
+    USER_DELETE_FAIL,
+
     EDIT_USER_PROFILE_REQUEST,
     EDIT_USER_PROFILE_SUCCESS,
     EDIT_USER_PROFILE_FAIL,
@@ -140,6 +144,30 @@ export const editUserProfileReducer = (state = {}, action) => {
             }
 
         case EDIT_USER_PROFILE_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const deleteUserReducer = (state = {}, action) => {
+    switch(action.type) {
+        case USER_DELETE_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case USER_DELETE_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+            }
+
+        case USER_DELETE_FAIL:
             return {
                 loading: false,
                 error: action.payload

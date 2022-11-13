@@ -25,6 +25,10 @@ function UserList() {
         dispatch(listUsers())
     },[dispatch])
 
+    const deleteUserHandler = (id) => {
+      
+    }
+
   return (
     <Row>
       <h6>ALL USERS</h6>
@@ -67,7 +71,7 @@ function UserList() {
                           </Link>
                         </td>
                         <td>
-                          <Button  className='btn-sm'>
+                          <Button onClick={() => deleteUserHandler(user.id)}  className='btn-sm'>
                             <DeleteIcon style={{color:'red'}} />
                           </Button>
                         </td>
