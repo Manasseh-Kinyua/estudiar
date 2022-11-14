@@ -32,12 +32,13 @@ function Header() {
 
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
+                <SearchBox  />
                     <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
+                        className="me-auto my-2 my-lg-0 ml-5"
+                        style={{ maxHeight: '100px', marginLeft:'1rem' }}
                         navbarScroll
                     >
-                        <SearchBox  />
+                        
 
                         {userInfo && userInfo.isAdmin && (
                             <NavDropdown

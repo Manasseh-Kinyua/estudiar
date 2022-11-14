@@ -4,8 +4,17 @@ import { useNavigate } from 'react-router-dom'
 
 function SearchBox() {
 
+  const [keyword, setKeyword] = useState('')
+
+  let navigate = useNavigate()
+
     const submitHandler = (e) => {
         e.preventDefault()
+        if(keyword) {
+          navigate(`/?keyword=${keyword}`)
+        } else {
+          navigate(navigate(navigate.location.pathname))
+        }
     }
     
   return (
@@ -14,7 +23,9 @@ function SearchBox() {
         type='text'
         name='q'
         placeholder='Search...'
-        className='form-control-lg'>
+        className='form-control-lg'
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}>
 
         </Form.Control>
     </Form>

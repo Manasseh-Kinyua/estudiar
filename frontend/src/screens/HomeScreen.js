@@ -7,11 +7,17 @@ import Loader from '../components/Loader'
 import Avatar from '@mui/material/Avatar';
 import Message from '../components/Message'
 import Chip from '@mui/material/Chip';
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 function HomeScreen() {
 
     const dispatch = useDispatch()
+
+    const navigate = useNavigate()
+    
+    const location = useLocation()
+    const searchParams = new URLSearchParams(location.search)
+    let keyword = searchParams.get('keyword') ? searchParams.get('keyword') : ''
 
     const userLogin = useSelector(state => state.userLogin)
     const {userInfo} = userLogin
@@ -26,10 +32,10 @@ function HomeScreen() {
     const {loading: loadingTopics, error: errorTopics, topics} = allTopics
 
     useEffect(() => {
-        dispatch(listRooms())
+        dispatch(listRooms(keyword))
         dispatch(listAllMessages())
         dispatch(listAllTopics())
-    }, [dispatch])
+    }, [dispatch, keyword])
 
   return (
     <div>

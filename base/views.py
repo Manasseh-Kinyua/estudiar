@@ -83,6 +83,8 @@ def deleteUser(request, pk):
     user.delete()
     return Response('User has been deleted')
 
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
 def getUserDetails(request,pk):
     user = User.objects.get(id=pk)
     serializer = UserSerializer(user, many=False)
@@ -106,7 +108,11 @@ def updateUser(request, pk):
 
 @api_view(['GET'])
 def getRooms(request):
-    rooms = Room.objects.all()
+    query = request.query_params.get('keyword')
+    print('KEYWORD......',query)
+    if query == None:
+        query = ''
+    rooms = Room.objects.filter(name__icontains=query)
     serializer = RoomSerializer(rooms, many=True)
     return Response(serializer.data)
 

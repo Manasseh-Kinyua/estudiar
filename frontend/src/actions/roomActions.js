@@ -45,13 +45,13 @@ import { CREATE_MESSAGE_ENDPOINT, CREATE_ROOM_ENDPOINT, CREATE_ROOM_REVIEW_ENDPO
 import { GET_SINGLE_ROOM_ENDPOINT } from "../constants/apiConstants";
 import axios from 'axios'
 
-export const listRooms = () => async (dispatch) => {
+export const listRooms = (keyword='') => async (dispatch) => {
     try {
         dispatch({
             type: ROOMS_LIST_REQUEST
         })
 
-        const {data} = await axios.get(GET_ALL_ROOMS_ENDPOINT)
+        const {data} = await axios.get(`${GET_ALL_ROOMS_ENDPOINT}?keyword=${keyword}`)
         dispatch({
             type: ROOMS_LIST_SUCCESS,
             payload: data
