@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -18,7 +18,7 @@ import UserEditScreen from './screens/UserEditScreen';
 function App() {
   return (
     <div>
-      <BrowserRouter>
+      <HashRouter>
         <Header />
         <main className='py-3'>
           <Container maxWidth='xl'>
@@ -38,7 +38,7 @@ function App() {
           </Container>
         </main>
         <Footer />
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
