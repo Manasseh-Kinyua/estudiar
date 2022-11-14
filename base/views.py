@@ -8,6 +8,7 @@ from .serializers import RoomSerializer, UserSerializer, UserSerializerWithToken
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
+from django.db.models import Q
 
 # Create your views here.
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -112,7 +113,11 @@ def getRooms(request):
     print('KEYWORD......',query)
     if query == None:
         query = ''
-    rooms = Room.objects.filter(name__icontains=query)
+    rooms = Room.objects.filter(
+        Q(name__icontains=query) |
+        Q(topic__name__icontains=query) |
+        Q(host__username__icontains=query)
+        )
     serializer = RoomSerializer(rooms, many=True)
     return Response(serializer.data)
 

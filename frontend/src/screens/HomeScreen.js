@@ -68,10 +68,13 @@ function HomeScreen() {
             </Row>
             <div >
               <p>Filter rooms by Topic:</p>
+              <span>
+                <Link to='/'><Chip component={'span'} label='All' variant="outlined" color="info" style={{backgroundColor: 'rgb(1, 15, 32)', color: '#46B5D1', margin:'.1rem'}} /></Link>
+              </span>
               {topics.map(topic => (
                 // <Col md={2} sm={2} lg={2} key={topic.id}>
                   <span key={topic.id} style={{margin:'1rem'}}>
-                    <Chip component={'span'} label={topic.name} variant="outlined" color="info" style={{backgroundColor: 'rgb(1, 15, 32)', color: '#46B5D1', margin:'.1rem'}} />
+                    <Link to={`?keyword=${topic.name}`}><Chip component={'span'} label={topic.name} variant="outlined" color="info" style={{backgroundColor: 'rgb(1, 15, 32)', color: '#46B5D1', margin:'.1rem'}} /></Link>
                   </span>
                 // {/* </Col> */}
               ))}
