@@ -18,10 +18,16 @@ import {
     USER_DETAILS_REQUEST,
     USER_DETAILS_SUCCESS,
     USER_DETAILS_FAIL,
+    USER_DETAILS_RESET,
 
     USER_DELETE_REQUEST,
     USER_DELETE_SUCCESS,
     USER_DELETE_FAIL,
+
+    USER_EDIT_REQUEST,
+    USER_EDIT_SUCCESS,
+    USER_EDIT_FAIL,
+    USER_EDIT_RESET,
 
     EDIT_USER_PROFILE_REQUEST,
     EDIT_USER_PROFILE_SUCCESS,
@@ -151,6 +157,35 @@ export const userDetailsReducer = (state = {user:{}}, action) => {
                 loading: false,
                 error: action.payload
             }
+        case USER_DETAILS_RESET:
+            return {user:{}}
+
+        default:
+            return state
+    }
+}
+
+export const userEditReducer = (state = {}, action) => {
+    switch(action.type) {
+        case USER_EDIT_REQUEST:
+            return {
+                loading: true,
+            }
+
+        case USER_EDIT_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+            }
+
+        case USER_EDIT_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case USER_EDIT_RESET:
+            return {}
 
         default:
             return state

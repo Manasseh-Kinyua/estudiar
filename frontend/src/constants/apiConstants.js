@@ -14,6 +14,7 @@ export const GET_USER_PROFILE_ENDPOINT = `${BASE_URL}users/profile/`
 export const GET_USER_DETAILS_ENDPOINT = `${BASE_URL}users/details/`
 export const EDIT_USER_PROFILE_ENDPOINT = `${BASE_URL}users/profile/update/`
 export const DELETE_USER_PROFILE_ENDPOINT = `${BASE_URL}users/delete/`
+export const EDIT_USER_ENDPOINT = `${BASE_URL}users/update/`
 
 export const GET_ALL_MESSAGES_ENDPOINT = `${BASE_URL}messages/`
 export const CREATE_MESSAGE_ENDPOINT = `${BASE_URL}messages/create/`
