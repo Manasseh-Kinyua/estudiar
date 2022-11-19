@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!&-yuuo)+jj8^qhbxooac7wkf=yse20$zvo!@p99luoq)3f=f$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'nasseh-estudiar.herokuapp.com']
 
 
 # Application definition
@@ -87,6 +87,7 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -125,8 +126,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'estudiar',
+        'USER': 'nasseh',
+        'PASSWORD': 'nasseh82473',
+        'HOST': 'estudiar-identifier.cpdwqcchidu8.eu-west-3.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -171,9 +176,14 @@ STATICFILES_DIRS = [
     BASE_DIR / 'frontend/build/static'
 ]
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+if os.getcwd() == '/app':
+    DEBUG = False
