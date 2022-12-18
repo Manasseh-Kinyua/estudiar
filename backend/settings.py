@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!&-yuuo)+jj8^qhbxooac7wkf=yse20$zvo!@p99luoq)3f=f$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'nasseh-estudiar.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'nasseh-estudiar.herokuapp.com', 'web-production-2294.up.railway.app']
 
 
 # Application definition
@@ -134,6 +134,17 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'FguFF06hBthth7ajpzsO',
+#         'HOST': 'containers-us-west-105.railway.app',
+#         'PORT': '5687',
+#     }
+# }
 
 
 # Password validation

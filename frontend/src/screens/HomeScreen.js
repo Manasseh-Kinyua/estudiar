@@ -71,7 +71,7 @@ function HomeScreen() {
               <span>
                 <Link to='/'><Chip component={'span'} label='All' variant="outlined" color="info" style={{backgroundColor: 'rgb(1, 15, 32)', color: '#46B5D1', margin:'.1rem'}} /></Link>
               </span>
-              {topics.map(topic => (
+              {topics && topics.map(topic => (
                 // <Col md={2} sm={2} lg={2} key={topic.id}>
                   <span key={topic.id} style={{margin:'1rem'}}>
                     <Link to={`?keyword=${topic.name}`}><Chip component={'span'} label={topic.name} variant="outlined" color="info" style={{backgroundColor: 'rgb(1, 15, 32)', color: '#46B5D1', margin:'.1rem'}} /></Link>
@@ -82,7 +82,7 @@ function HomeScreen() {
             <Row className='py-4'>
               {loading && <Loader />}
               {error && <Message severity='error' error={error}/>}
-              {rooms.map(room => (
+              {rooms && rooms.map(room => (
                 <Col className='my-2' sm={6} key={room.id}>
                   <Room room={room} />
                 </Col>
@@ -94,7 +94,7 @@ function HomeScreen() {
             <span style={{backgroundColor: '#46B5D1', padding: '1rem', borderTopLeftRadius: '.8rem', borderTopRightRadius: '.8rem'}}>
               <h6>RECENT ACTIVITY</h6>
             </span>
-            {messages.map(message => (
+            {messages && messages.map(message => (
               <Card style={{backgroundColor: 'rgb(1, 15, 32)', border: '0.1px solid gray', width: '80%', margin: '.5rem auto'}} key={message.id}>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                   <div style={{display: 'flex', alignItems: 'center', padding: '5px'}}>
