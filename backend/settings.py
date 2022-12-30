@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-!&-yuuo)+jj8^qhbxooac7wkf=yse20$zvo!@p99luoq)3f=f$
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost' 'estudiar.up.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'estudiar.up.railway.app']
 
 
 # Application definition
