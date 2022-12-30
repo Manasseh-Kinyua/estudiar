@@ -1,8 +1,8 @@
 const MODE  = process.env.REACT_APP_MODE
 
-if(MODE === "dev") {
+if(MODE === 'dev') {
     var BASE_URL = "http://127.0.0.1:8000/api/"
-} else if(MODE === "prod") {
+} else if(MODE === 'prod') {
     var BASE_URL = "https://estudiar.up.railway.app/api/"
 }
 // export const BASE_URL = "https://estudiar.up.railway.app/api/"
