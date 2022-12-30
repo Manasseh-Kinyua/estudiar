@@ -12,16 +12,22 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!&-yuuo)+jj8^qhbxooac7wkf=yse20$zvo!@p99luoq)3f=f$'
+# SECRET_KEY = 'django-insecure-!&-yuuo)+jj8^qhbxooac7wkf=yse20$zvo!@p99luoq)3f=f$'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -123,29 +129,40 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+import dj_database_url
 
-DATABASES = {
+MODE=os.getenv("MODE", default="dev")
+DEBUG = os.getenv('DEBUG', default=False)
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+# development
+if os.getenv('MODE')=="dev":
+   DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'estudiar',
         'USER': 'nasseh',
         'PASSWORD': 'nasseh82473',
-        'HOST': 'estudiar-identifier.cpdwqcchidu8.eu-west-3.rds.amazonaws.com',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'railway',
-#         'USER': 'postgres',
-#         'PASSWORD': 'FguFF06hBthth7ajpzsO',
-#         'HOST': 'containers-us-west-105.railway.app',
-#         'PORT': '5687',
-#     }
-# }
-
+# production
+elif os.getenv('MODE')=="prod":
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'S9J2c0iF7ZFsGtH5dUaf',
+        'HOST': 'containers-us-west-59.railway.app',
+        'PORT': '7129',
+    }
+}
+else:
+   DATABASES = {
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
