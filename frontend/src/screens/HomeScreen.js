@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Button, Card } from 'react-bootstrap'
+import { Row, Col, Button, Card, Alert } from 'react-bootstrap'
 import { listAllMessages, listAllTopics, listRooms } from '../actions/roomActions'
 import Room from '../components/Room'
 import Loader from '../components/Loader'
 import Avatar from '@mui/material/Avatar';
 import Message from '../components/Message'
 import Chip from '@mui/material/Chip';
+import GuestUser from '../components/GuestUser'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 function HomeScreen() {
@@ -39,6 +40,9 @@ function HomeScreen() {
 
   return (
     <div>
+      <Alert>
+        If you are a Recruiter and dont want to create an account, You can login as a Guest User to try my app. <GuestUser />
+      </Alert>
       <Row className='gap-5'>
             <Col md={8}>
             <Row>
