@@ -46,8 +46,8 @@ function GuestUser() {
             </DialogContentText>
                 <h6>Once you Login: </h6>
                 <ul>
-                    <li>You will be able to shop (Normal User Account)</li>
-                    <li>You also get manager status (Admin's Account)</li>
+                    <li>Create Room and Interact with other users (Normal User Account)</li>
+                    <li>Manage Users and Rooms (Admin's Account)</li>
                 </ul>
         </DialogContent>
         <DialogActions>
